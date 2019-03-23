@@ -19,3 +19,7 @@ public/sitemap.xml
 public/sitemap.xml.gz
 
 .idea/workspace.xml
+.idea/b2b.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
