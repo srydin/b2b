@@ -15,20 +15,7 @@
 	<section id="primary" class="content-area">
 		<main id="main" class="site-main">
 
-		<?php
-		if ( have_posts() ) {
-
-			// Load posts loop.
-			while ( have_posts() ) {
-                // do nothing
-			}
-
-
-		} else {
-
-        echo 'Sorry, no posts found.';
-		}
-		?>
+		Front page
 
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->
