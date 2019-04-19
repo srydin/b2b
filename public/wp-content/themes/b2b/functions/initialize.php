@@ -16,9 +16,11 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 //});
 
 require_once($base_path . 'classes/class-databaseobject.php');
+require_once($base_path . 'classes/class-screenlistobject.php');
+require_once($base_path . 'classes/class-screenobject.php');
 require_once($base_path . 'classes/class-company.php');
-require_once($base_path . 'classes/class-companyscreen.php');
 require_once($base_path . 'classes/class-companyscreenlist.php');
+require_once($base_path . 'classes/class-companyscreen.php');
 
 
 // connect to the db
