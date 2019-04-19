@@ -3,8 +3,8 @@
 class Company extends DatabaseObject {
 
     // Properties
-    protected static $table_name = 'b2b_company';
-    public static $db_columns = ['id','name'];
+    public static $table_name = "b2b_company";
+    public static $db_columns = ['id','name','category','rank'];
     public $id;
     public $name;
 

@@ -5,3 +5,7 @@ $base_path = get_template_directory() . '/functions/';
 
 // Initialize
 require($base_path . 'initialize.php');
+
+add_action( 'init', function () {
+    CompanyScreenList::get_instance();
+} );
