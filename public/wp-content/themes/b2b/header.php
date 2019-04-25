@@ -26,7 +26,8 @@
         .green {color:#78DC84}
         .green-bg {background:#78DC84}
         .blue {color:#21218B; border-color:#21218B;}
-        .dark-blue {color:#1F1F37}
+        .dark-blue {color:#1F1F37; border-color:#1F1F37;}
+        .dark-blue-bg {background:#1F1F37}
         .lt-blue {color:#F7F7FB}
         .lt-blue-bg {background:#F7F7FB}
 
@@ -90,7 +91,7 @@
             position: fixed;
             position: sticky;
             position: -webkit-sticky;
-            z-index: 2;
+            z-index: 9999999;
             top: 0;
             left: 0;
             width: 100%;
@@ -101,12 +102,7 @@
             align-self: center;
             box-sizing: border-box;
         }
-        header nav {
-            float: right;
-            display: block;
-            height: inherit;
-        }
-        header nav ul {
+        header nav ul, footer nav ul {
             display: inline-block;
             display: inline-flex;
             list-style: none;
@@ -118,16 +114,16 @@
             justify-content: space-evenly;
             flex-wrap: wrap;
         }
-        header nav ul li {
-            padding-right: 1vw;
+        header nav ul li, footer nav ul li {
+            padding-right: 1em;
         }
+        header nav ul li a {}
         header nav button {
-            padding: .5em;
-            font-size: 1.6vw;
+            border:2px solid;
+            border-radius:2px;
         }
         #top-banner {
             background-size: cover;
-            background-color: #eee;
             display: block;
             display: flex;
             justify-content: center;
@@ -140,6 +136,19 @@
             position: relative;
             z-index:0;
             padding-bottom: 3.999em;
+            overflow: hidden;
+        }
+        #top-banner img {
+            object-fit: cover;
+            object-position: top center;
+            z-index: -1;
+            width: 110%;
+            height: 110%;
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            filter: blur(5px);
+            opacity: 0.8;
             overflow: hidden;
         }
         #top-banner input[type=text] {
@@ -188,6 +197,8 @@
             justify-content: center;
         }
         .article-module .blurb, .article-module .photo {flex-basis:50%;}
+        .article-module .photo img {object-fit:cover;height:100%;width:100%;}
+        .cta-module{z-index:3;position: relative;}
         .cta-module input[type=email] {
             box-sizing: border-box;
             border: 1px solid #E7E7EB;
@@ -198,7 +209,7 @@
     </style>
 </head>
 <body <?php body_class(); ?> >
-<header class="shadow-3x pad-1 v-pad-0">
+<header class="shadow-1x pad-1 v-pad-0 white-bg">
     <svg id="header-logo" width="150px" height="36px">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <path d="M0,0 L49,0 C52.8659932,-7.10171439e-16 56,3.13400675 56,7 L56,36 L7,36 C3.13400675,36 4.73447626e-16,32.8659932 0,29 L0,0 Z" id="Rectangle" fill="#49C958"></path>
@@ -210,12 +221,12 @@
     </svg>
     <nav>
         <ul>
-            <li><a href="">About Us</a></li>
-            <li><a href="">Knowledge Center</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a class="w-500 dark-blue" href="">About Us</a></li>
+            <li><a class="w-500 dark-blue" href="">Knowledge Center</a></li>
+            <li><a class="w-500 dark-blue" href="">Contact</a></li>
         </ul>
-        <button>
-            Join Us
+        <button id="header-join" class="sm-pad-2 blue text-1 w-600">
+            <span class="pad-1 v-pad-0">Join Us</span>
         </button>
     </nav>
 </header>

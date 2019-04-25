@@ -10,11 +10,13 @@
         </g>
     </svg>
     <p class="text-center">Copyright 2019 B2Breviews.com. All Rights Reserved.</p>
-    <ul>
-        <li><a href="">Privacy Policy</a></li>
-        <li><a href="">Terms of Use</a></li>
-        <li><a href="">Contact</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Terms of Use</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </nav>
 </footer>
 </body>
 </html>
