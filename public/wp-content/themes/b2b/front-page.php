@@ -1,57 +1,4 @@
 <?php get_header(); ?>
-    <section id="top-banner" class="dark-blue-bg">
-        <h1 class="white text-5 w-600">Make Your Business Better</h1>
-        <h2 class="white text-3 w-500">B2B Reviews helps you find business solutions.</h2>
-        <div class="pad-2"><input class="sm-text-1 pad-2" placeholder="Select a category" type="text"><button class="text-1 w-700 white cool-btn">Find Solutions</button></div>
-        <picture>
-            <source type="image/webp" srcset="top-banner.webp">
-            <source type="image/jpeg" srcset="top-banner.jpg">
-            <img src="top-banner.jpg">
-        </picture>
-    </section>
-    <section id="quick-links">
-        <div id="quick-1" class="pad-2 shadow-2x text-center text-2 w-500">
-            Who We Are
-        </div>
-        <div id="quick-2" class="pad-2 shadow-2x text-center text-2 w-500">
-            Business Categories
-        </div>
-        <div id="quick-3" class="pad-2 shadow-2x text-center text-2 w-500">
-            Popular Articles
-        </div>
-    </section>
-    <section id="who-we-are" class="pad-4 divided">
-        <h2 class="lg-text-wrapper text-4 h-pad-0 w-700 text-center">We help solve complex problems</h2>
-        <p class="sm-text-wrapper text-1 sm-pad-1 h-pad-0 w-400 text-center">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non viverra dunt suscipit min.</p>
-        </div>
-    </section>
-    <section id="business-categories" class="pad-4 divided">
-        <h2 class="xs-text-wrapper text-3 sm-pad-2 w-400 text-center">Helping businesses make better decisions</h2>
-        <a class="text-1 w-500 text-center sm-pad-3 h-pad-0 blue underline block" href="">View All Categories</a>
-        <ul>
-            <li>
-                <h3><a href="">Payroll Services</a></h3>
-                <picture>
-                    <source type="image/webp" srcset="payroll-services.webp">
-                    <source type="image/jpeg" srcset="payroll-services.jpg">
-                    <img src="payroll-services.jpg">
-                </picture>
-            </li>
-        </ul>
-        <ul>
-            <li class="pad-1 inline shadow-3px w-400 text-2">
-                <a class="pad-1 v-pad-0 inline dark-blue" href="">Link name</a>
-                <a class="pad-1 v-pad-0 inline green-bg">
-                    <svg class="sm-pad-2" width="7px" height="12px">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
-                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
-                            </g>
-                        </g>
-                    </svg>
-                </a>
-            </li>
-        </ul>
         <?php
 
         //        $companies = Company::find_all();
@@ -92,28 +39,298 @@
         }
 
         ?>
+    <section id="top-banner" class="pad-3 dark-blue-bg">
+        <h1 class="white flex-text-5 w-600 benton">Make Your Business Better</h1>
+        <h2 class="white flex-text-3 w-500 benton">B2B Reviews helps you find business solutions.</h2>
+        <div id="form-wrapper" class="pad-1 h-pad-0 sm-text-wrapper text-center">
+            <input class="sm-text-1 pad-2" placeholder="Select a category" type="text">
+            <button class="text-1 w-700 white benton">Find Solutions</button>
+        </div>
+        <picture>
+            <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/top-banner.webp">
+            <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/top-banner.jpg">
+            <img src="wp-content/themes/b2b/assets/images/top-banner.jpg">
+        </picture>
+    </section>
+    <section id="quick-links" class="benton">
+        <div id="quick-1" class="pad-2 shadow-2x text-center text-2 w-500">
+            Who We Are
+        </div>
+        <div id="quick-2" class="pad-2 shadow-2x text-center text-2 w-500">
+            Business Categories
+        </div>
+        <div id="quick-3" class="pad-2 shadow-2x text-center text-2 w-500">
+            Popular Articles
+        </div>
+    </section>
+    <section id="who-we-are" class="pad-3 divided">
+        <h2 class="lg-text-wrapper text-4 h-pad-0 w-700 text-center benton">We help solve complex problems</h2>
+        <p class="sm-text-wrapper text-1 sm-pad-1 h-pad-0 w-400 text-center">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non viverra dunt suscipit min.</p>
+        </div>
+    </section>
+    <section id="business-categories" class="pad-4 divided">
+        <h2 class="xs-text-wrapper text-3 sm-pad-2 w-400 text-center benton">Helping businesses make better decisions</h2>
+        <a class="text-1 w-500 text-center sm-pad-3 h-pad-0 blue underline block benton" href="">View All Categories</a>
+        <ul id="featured-category-loop" class="benton lg-text-wrapper pad-3 v-pad-0">
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+            <li class="pad-1">
+                <h3 class="green-bg pad-1"><a class="white" href="">Payroll Services</a></h3>
+                <picture>
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/payroll-services.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/payroll-services.jpg">
+                </picture>
+            </li>
+        </ul>
+        <ul id="category-loop" class="benton lg-text-wrapper pad-3 v-pad-0">
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+            <li class="shadow-2x w-400 text-2">
+                <a class="pad-1 v-pad-0 dark-blue" href="">Link name</a>
+                <a class="sm-pad-1 green-bg">
+                    <svg class="pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+        </ul>
     </section>
     <section id="popular-articles" class="divided">
         <div class="pad-4">
-            <h4 class="sm-text-wrapper text-3 text-center">Popular Articles</h4>
-            <a class="text-1 w-500 text-center sm-pad-3 h-pad-0 blue underline block" href="">Visit Knowledge Center</a>
+            <h4 class="sm-text-wrapper text-3 text-center benton">Popular Articles</h4>
+            <a class="text-1 w-500 text-center sm-pad-3 h-pad-0 blue underline block benton" href="">Visit Knowledge Center</a>
         </div>
         <div class="article-module divided">
             <div class="photo">
                 <picture>
-                    <source type="image/webp" srcset="article-img.webp">
-                    <source type="image/jpeg" srcset="article-img.jpg">
-                    <img src="article-img.jpg">
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/article-img.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/article-img.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/article-img.jpg">
                 </picture>
             </div>
-            <div class="blurb pad-4 lt-blue-bg">
-                <h3 class="text-4 pad-0 w-700">Elit suscipit mi non viverra</h3>
-                <p class="text-1 pad-1 h-pad-0 w-400">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non.</p>
-                <a class="inline blue pad-1 white-bg shadow-3x w-500" href=""><span class="pad-1 v-pad-0">Read Article</span></a>
+            <div class="blurb pad-3 lt-blue-bg">
+                <div class="sm-text-wrapper">
+                    <h3 class="flex-text-4 pad-0 w-700 benton">Elit suscipit mi non viverra</h3>
+                    <p class="text-1 pad-1 h-pad-0 w-400">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non.</p>
+                    <a class="inline blue pad-1 white-bg shadow-3x w-500 benton" href=""><span class="pad-1 v-pad-0">Read Article</span></a>
+                </div>
             </div>
         </div>
-        <div class="cta-module text-center pad-5 shadow-2x">
-            <svg id="cta-logo" width="150px" height="36px">
+        <div id="cta-module" class="pad-3 shadow-2x">
+            <svg id="cta-logo" class="pad-2 h-pad-0" width="150px" height="36px">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <path d="M0,0 L49,0 C52.8659932,-7.10171439e-16 56,3.13400675 56,7 L56,36 L7,36 C3.13400675,36 4.73447626e-16,32.8659932 0,29 L0,0 Z" id="Rectangle" fill="#49C958"></path>
                     <g transform="translate(6.587000, 8.658000)" fill-rule="nonzero">
@@ -122,30 +339,34 @@
                     </g>
                 </g>
             </svg>
-            <h2 class="md-text-wrapper pad-1 text-3 w-500 text-center">Want exclusive resources and solutions for your business?</h2>
-            <input class="pad-1 text-1" placeholder="E-mail" type="email">
-            <button class="pad-1 text-1 green-bg white w-700">
-                <span class="sm-pad-2 v-pad-0">Join Us</span>
-                <svg class="sm-pad-2 v-pad-0" width="7px" height="12px">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
-                            <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+            <h2 class="md-text-wrapper text-3 w-500 benton">Want exclusive resources and solutions for your business?</h2>
+            <div id="email-input" class="pad-2 h-pad-0">
+                <input class="pad-1 text-1" placeholder="E-mail" type="email">
+                <button class="pad-1 text-1 green-bg white w-700">
+                    <span class="sm-pad-2 v-pad-0 benton">Join Us</span>
+                    <svg class="sm-pad-2 v-pad-0" width="7px" height="12px">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g fill="#FFFFFF" fill-rule="nonzero">
+                                <path d="M3.5,5.99306757 L7.00345424,2.87888602 C7.62262839,2.328509 8.57073695,2.38428009 9.12111398,3.00345424 C9.671491,3.62262839 9.61571991,4.57073695 8.99654576,5.12111398 L4.49654576,9.12111398 C3.92821673,9.62629534 3.07178327,9.62629534 2.50345424,9.12111398 L-1.99654576,5.12111398 C-2.61571991,4.57073695 -2.671491,3.62262839 -2.12111398,3.00345424 C-1.57073695,2.38428009 -0.622628395,2.328509 -0.00345424176,2.87888602 L3.5,5.99306757 Z" transform="translate(3.500000, 5.999992) rotate(-90.000000) translate(-3.500000, -5.999992) "></path>
+                            </g>
                         </g>
-                    </g>
-                </svg>
-            </button>
+                    </svg>
+                </button>
+            </div>
         </div>
         <div class="article-module">
-            <div class="blurb pad-4 lt-blue-bg">
-                <h3 class="text-5 pad-0 w-700">Semper id Maurus</h3>
-                <p class="text-1 pad-1 h-pad-0 w-400">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non.</p>
-                <a class="inline blue pad-1 white-bg shadow-3x w-500" href=""><span class="pad-1 v-pad-0">Read Article</span></a>
+            <div class="blurb pad-3 lt-blue-bg">
+                <div class="sm-text-wrapper">
+                    <h3 class="flex-text-4 pad-0 w-700 benton">Semper id Maurus</h3>
+                    <p class="text-1 pad-1 h-pad-0 w-400">Cras semper id mauris feugiat tincidunt. Fusce ac massa molestie, laoreet felis non, tincidunt elit. Aenean metus quam, tincidunt suscipit mi non.</p>
+                    <a class="inline blue pad-1 white-bg shadow-3x w-500 benton" href=""><span class="pad-1 v-pad-0">Read Article</span></a>
+                </div>
             </div>
             <div class="photo">
                 <picture>
-                    <source type="image/webp" srcset="article-img-2.webp">
-                    <source type="image/jpeg" srcset="article-img-2.jpg">
-                    <img src="article-img-2.jpg">
+                    <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/article-img-2.webp">
+                    <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/article-img-2.jpg">
+                    <img src="wp-content/themes/b2b/assets/images/article-img-2.jpg">
                 </picture>
             </div>
         </div>
