@@ -14,32 +14,18 @@ class CompanyScreen extends ScreenObject {
     public function __construct() {
         add_filter( 'set-screen-option', [ __CLASS__, 'set_screen' ], 10, 3 );
         add_action( 'admin_menu', [ $this, 'company_menu' ] );
+        add_action( 'admin_menu', [ $this, 'company_edit' ] );
     }
 
     /**
-     * Plugin settings page
+     * listings page
      */
-    public function plugin_settings_page() {
-        ?>
-        <div class="wrap">
-            <h2>WP_List_Table Class Example</h2>
+    public function company_listings_page() {
+        include ( __DIR__ . '/templates/company-listing.php');
+    }
 
-            <div id="poststuff">
-                <div id="post-body" class="metabox-holder columns-2">
-                    <div id="post-body-content">
-                        <div class="meta-box-sortables ui-sortable">
-                            <form method="post">
-                                <?php
-                                $this->CompanyScreenList->prepare_items();
-                                $this->CompanyScreenList->display(); ?>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <br class="clear">
-            </div>
-        </div>
-        <?php
+    public function company_edit_page() {
+        include ( __DIR__ . '/templates/company-edit.php');
     }
 
     /**
@@ -50,7 +36,7 @@ class CompanyScreen extends ScreenObject {
         $option = 'per_page';
         $args   = [
             'label'   => 'Companies',
-            'default' => 5,
+            'default' => 20,
             'option'  => '_per_page'
         ];
 
@@ -59,18 +45,40 @@ class CompanyScreen extends ScreenObject {
         $this->CompanyScreenList = new CompanyScreenList();
     }
 
+    public function edit_options() {
+
+        add_query_arg(['action' => 'edit']);
+    }
+
     public function company_menu() {
 
         $hook = add_menu_page(
-            'Company List',
-            'Company List',
+            'Companies',
+            'Companies List',
             'manage_options',
             'companies',
-            [ $this, 'plugin_settings_page' ]
+            [ $this, 'company_listings_page' ]
         );
 
         add_action( "load-$hook", [ $this, 'screen_options' ] );
 
     }
+
+    public function company_edit() {
+
+
+        // Submenu for "Add Company"
+        add_submenu_page(
+            'companies',
+            "Add New Company", // page title
+            "Add New Company", // menu title
+            'manage_options', // capability
+            'company_edit', // menu_slug,
+            [ $this, 'company_edit_page' ]
+        );
+    }
+
 }
+
+
 ?>

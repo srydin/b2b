@@ -28,11 +28,11 @@ class ScreenListObject extends WP_List_Table {
      *
      * @return mixed
      */
-    public static function get_database_objs( $per_page = 5, $page_number = 1 ) {
+    public static function get_database_objs( $per_page = 5, $page_number = 1, $columns=[] ) {
 
         global $wpdb;
 
-        $sql = "SELECT * FROM " . static::$class_reference::$table_name;
+        $sql = "SELECT {$columns} FROM " . static::$class_reference::$table_name;
 
         if ( ! empty( $_REQUEST['orderby'] ) ) {
             $sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
@@ -48,17 +48,31 @@ class ScreenListObject extends WP_List_Table {
         return $result;
     }
 
+    public static function get_pretty_objs(){
+
+        if(empty($columns)){$columns = "*";}else{$columns = implode(", ", $columns);}
+
+        $array = static::get_database_objs( $per_page = 5, $page_number = 1, $columns);
+
+        foreach ($array as $item => $value){
+            $array[$item] = wp_unslash($value);
+        }
+
+        return $array;
+    }
+
 
     /**
      * Delete a record.
      *
      * @param int $id ID
      */
-    public static function delete($id ) {
+    public static function delete($id) {
         global $db;
 
-        $company = new static::$class_reference($id);
-        $company->delete();
+        $obj = new static::$class_reference();
+        $obj = $obj->find_by_id($id);
+        $obj->delete();
     }
 
 
@@ -70,8 +84,8 @@ class ScreenListObject extends WP_List_Table {
     public static function record_count() {
         global $db;
 
-        $companies = new static::$class_reference();
-        $count = $companies->count_all();
+        $obj = new static::$class_reference();
+        $count = $obj->count_all();
 
         return $count;
     }
@@ -98,10 +112,6 @@ class ScreenListObject extends WP_List_Table {
             if (in_array($column_name, $columns)){
                 return $item[ $column_name ];
             }
-            else{
-                return print_r( $item, true ); //Show the whole array for troubleshooting purposes
-
-            }
     }
 
     /**
@@ -113,7 +123,7 @@ class ScreenListObject extends WP_List_Table {
      */
     function column_cb( $item ) {
         return sprintf(
-            '<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['ID']
+            '<input type="checkbox" name="bulk-delete[]" value="%s" />', $item['id']
         );
     }
 
@@ -127,12 +137,13 @@ class ScreenListObject extends WP_List_Table {
      */
     function column_name( $item ) {
 
-        $delete_nonce = wp_create_nonce( 'sp_delete_obj' );
+        $object_nonce = wp_create_nonce( 'sp_obj' );
 
         $title = '<strong>' . $item['name'] . '</strong>';
 
         $actions = [
-            'delete' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Delete</a>', esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['ID'] ), $delete_nonce )
+            'edit' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Edit</a>', 'company_edit', 'edit', absint( $item['id'] ), $object_nonce ),
+            'delete' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Delete</a>', esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $object_nonce )
         ];
 
         return $title . $this->row_actions( $actions );
@@ -150,6 +161,7 @@ class ScreenListObject extends WP_List_Table {
             ];
 
         $arr = static::$class_reference::$db_columns;
+
         array_shift($arr);
         foreach ($arr as $item){
             $columns[$item] = __( ucwords($item), 'sp' );
@@ -158,20 +170,6 @@ class ScreenListObject extends WP_List_Table {
         return $columns;
     }
 
-
-    /**
-     * Columns to make sortable.
-     *
-     * @return array
-     */
-    public function get_sortable_columns() {
-        $sortable_columns = array(
-            'name' => array( 'name', true ),
-            'city' => array( 'city', false )
-        );
-
-        return $sortable_columns;
-    }
 
     /**
      * Returns an associative array containing the bulk action
@@ -197,16 +195,16 @@ class ScreenListObject extends WP_List_Table {
         /** Process bulk action */
         $this->process_bulk_action();
 
-        $per_page     = $this->get_items_per_page( 'objs_per_page', 5 );
+        $per_page     = $this->get_items_per_page( 'objs_per_page', 20 );
         $current_page = $this->get_pagenum();
-        $total_items  = self::record_count();
+        $total_items  = static::record_count();
 
         $this->set_pagination_args( [
             'total_items' => $total_items, //WE have to calculate the total number of items
             'per_page'    => $per_page //WE have to determine how many items to show on a page
         ] );
 
-        $this->items = self::get_database_objs( $per_page, $current_page );
+        $this->items = self::get_pretty_objs();
     }
 
     public function process_bulk_action() {
@@ -217,16 +215,19 @@ class ScreenListObject extends WP_List_Table {
             // In our file that handles the request, verify the nonce.
             $nonce = esc_attr( $_REQUEST['_wpnonce'] );
 
-            if ( ! wp_verify_nonce( $nonce, 'sp_delete_obj' ) ) {
+            if ( ! wp_verify_nonce( $nonce, 'sp_obj' ) ) {
                 die( 'Something went wrong' );
             }
             else {
-                self::delete( absint( $_GET['obj'] ) );
+                static::delete( absint( $_GET['obj'] ) );
 
                 // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
                 // add_query_arg() return the current url
-                wp_redirect( esc_url_raw(add_query_arg()) );
-                exit;
+                $redirect_location = esc_url_raw(add_query_arg());
+                $redirect_location = remove_query_arg(array('action','obj','_wpnonce'),$redirect_location);
+
+               echo "<script type='text/javascript'>location.replace(\"$redirect_location\")</script>";
+               exit;
             }
 
         }
@@ -240,13 +241,17 @@ class ScreenListObject extends WP_List_Table {
 
             // loop over the array of record IDs and delete them
             foreach ( $delete_ids as $id ) {
-                self::delete( $id );
+                static::delete( $id );
 
             }
 
             // esc_url_raw() is used to prevent converting ampersand in url to "#038;"
             // add_query_arg() return the current url
-            wp_redirect( esc_url_raw(add_query_arg()) );
+            //wp_redirect( esc_url_raw(add_query_arg()) );
+            $redirect_location = esc_url_raw(add_query_arg());
+            $redirect_location = remove_query_arg(array('action','obj','_wpnonce'),$redirect_location);
+
+            echo "<script type='text/javascript'>location.replace(\"$redirect_location\")</script>";
             exit;
         }
     }

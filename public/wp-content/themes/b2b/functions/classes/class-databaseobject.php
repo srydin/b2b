@@ -3,50 +3,47 @@
 class DatabaseObject {
 
     // Definitions
+    public $id;
     static protected $database;
     static protected $table_name = "";
-    static protected $columns = [];
+    static protected $db_columns = [];
     public $errors = [];
 
     // Methods
-    // Db
-    static public function set_database($database) {
-        self::$database = $database;
-    }
+
 
     // SQL statements
     static public function find_by_sql($sql) {
-        $result = self::$database->query($sql);
-        if(!$result) {
+        global $wpdb;
+        $results = $wpdb->get_results($sql, OBJECT ); // don't forget to escape as needed
+        if(!$results) {
             exit("Database query failed.");
         }
 
         // results into objects
         $object_array = [];
-        while($record = $result->fetch_assoc()) {
-            $object_array[] = static::instantiate($record);
-        }
 
-        $result->free();
+        foreach ($results as $result){
+            $object_array[] = static::instantiate($result);
+        }
 
         return $object_array;
     }
 
     static public function find_all() {
         $sql = "SELECT * FROM " . static::$table_name;
-        return static::find_by_sql($sql);
+        return static::find_by_sql(esc_sql($sql));
     }
 
     static public function count_all() {
-        $sql = "SELECT COUNT(*) FROM " . static::$table_name;
-        $result_set = self::$database->query($sql);
-        $row = $result_set->fetch_array();
-        return array_shift($row);
+        global $wpdb;
+        $count = $wpdb->get_var( esc_sql("SELECT COUNT(*) FROM " . static::$table_name ));
+        return $count;
     }
 
     static public function find_by_id($id) {
         $sql = "SELECT * FROM " . static::$table_name . " ";
-        $sql .= "WHERE id='" . self::$database->escape_string($id) . "'";
+        $sql .= "WHERE id='" . (int) $id . "'";
         $obj_array = static::find_by_sql($sql);
         if(!empty($obj_array)) {
             return array_shift($obj_array);
@@ -66,7 +63,7 @@ class DatabaseObject {
         }
         return $object;
     }
-
+//
     protected function validate() {
         $this->errors = [];
 
@@ -79,15 +76,16 @@ class DatabaseObject {
         $this->validate();
         if(!empty($this->errors)) { return false; }
 
+        global $wpdb;
         $attributes = $this->sanitized_attributes();
         $sql = "INSERT INTO " . static::$table_name . " (";
         $sql .= join(', ', array_keys($attributes));
         $sql .= ") VALUES ('";
         $sql .= join("', '", array_values($attributes));
         $sql .= "')";
-        $result = self::$database->query($sql);
+        $result = $wpdb->query($sql);
         if($result) {
-            $this->id = self::$database->insert_id;
+            $this->id = $wpdb->insert_id;
         }
         return $result;
     }
@@ -96,6 +94,7 @@ class DatabaseObject {
         $this->validate();
         if(!empty($this->errors)) { return false; }
 
+        global $wpdb;
         $attributes = $this->sanitized_attributes();
         $attribute_pairs = [];
         foreach($attributes as $key => $value) {
@@ -104,9 +103,9 @@ class DatabaseObject {
 
         $sql = "UPDATE " . static::$table_name . " SET ";
         $sql .= join(', ', $attribute_pairs);
-        $sql .= " WHERE id='" . self::$database->escape_string($this->id) . "' ";
+        $sql .= " WHERE id='" . esc_sql($this->id) . "' ";
         $sql .= "LIMIT 1";
-        $result = self::$database->query($sql);
+        $result = $wpdb->query($sql);
         return $result;
     }
 
@@ -136,20 +135,19 @@ class DatabaseObject {
         }
         return $attributes;
     }
-
+//
     protected function sanitized_attributes() {
+        global $wpdb;
         $sanitized = [];
         foreach($this->attributes() as $key => $value) {
-            $sanitized[$key] = self::$database->escape_string($value);
+            $sanitized[$key] = esc_sql($value);
         }
         return $sanitized;
     }
-
+//
     public function delete() {
-        $sql = "DELETE FROM " . static::$table_name . " ";
-        $sql .= "WHERE id='" . self::$database->escape_string($this->id) . "' ";
-        $sql .= "LIMIT 1";
-        $result = self::$database->query($sql);
+        global $wpdb;
+        $result = $wpdb->delete( static::$table_name, array( 'id' => $this->id ) );
         return $result;
     }
 
