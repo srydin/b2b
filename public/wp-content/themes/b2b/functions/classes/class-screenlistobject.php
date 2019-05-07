@@ -55,7 +55,9 @@ class ScreenListObject extends WP_List_Table {
         $array = static::get_database_objs( $per_page = 5, $page_number = 1, $columns);
 
         foreach ($array as $item => $value){
+
             $array[$item] = wp_unslash($value);
+
         }
 
         return $array;
@@ -142,7 +144,7 @@ class ScreenListObject extends WP_List_Table {
         $title = '<strong>' . $item['name'] . '</strong>';
 
         $actions = [
-            'edit' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Edit</a>', 'company_edit', 'edit', absint( $item['id'] ), $object_nonce ),
+            'edit' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Edit</a>', esc_attr( $_REQUEST['page'] ) . '_edit', 'edit', absint( $item['id'] ), $object_nonce ),
             'delete' => sprintf( '<a href="?page=%s&action=%s&obj=%s&_wpnonce=%s">Delete</a>', esc_attr( $_REQUEST['page'] ), 'delete', absint( $item['id'] ), $object_nonce )
         ];
 

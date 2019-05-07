@@ -54,7 +54,7 @@ class CompanyScreen extends ScreenObject {
 
         $hook = add_menu_page(
             'Companies',
-            'Companies List',
+            'Companies',
             'manage_options',
             'companies',
             [ $this, 'company_listings_page' ]
@@ -73,7 +73,7 @@ class CompanyScreen extends ScreenObject {
             "Add New Company", // page title
             "Add New Company", // menu title
             'manage_options', // capability
-            'company_edit', // menu_slug,
+            'companies_edit', // menu_slug,
             [ $this, 'company_edit_page' ]
         );
     }
