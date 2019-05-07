@@ -1,44 +1,4 @@
 <?php get_header(); ?>
-        <?php
-
-        //        $companies = Company::find_all();
-        //
-        //        foreach ($companies as $company){
-        //            echo $company->name;
-        //        }
-        //        echo '<br>';
-        //
-        //        echo "count: " . Company::count_all();
-        //        echo '<br>';
-        //
-        //        $company1 = Company::find_by_id(7);
-        //        echo $company1->name;
-        //        echo '<br>';
-
-        //        $args = ['name' => 'jack', 'id' => null];
-        //        $a = new Company($args);
-        //        echo '<br>';
-        //
-        //        echo $a->name;
-        //        $result = $a->save();
-        //        $new_id = 0;
-        //        if($result === true) {
-        //            $new_id = $a->id;
-        //        }
-
-        //        var_dump(get_class_vars('Company'));
-
-        //        $company1->name = "John";
-        //        $company1->delete();
-
-        $company86 = Company::find_by_id(34);
-        //        $result = $company86->delete();
-        $result = "";
-        if($result === true) {
-            echo 'goodbye';
-        }
-
-        ?>
     <section id="top-banner" class="pad-3 dark-blue-bg">
         <h1 class="white flex-text-5 w-600 benton">Make Your Business Better</h1>
         <h2 class="white flex-text-3 w-500 benton">B2B Reviews helps you find business solutions.</h2>

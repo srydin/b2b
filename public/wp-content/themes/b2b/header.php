@@ -285,6 +285,7 @@
             #quick-links div {height: auto;}
         }
     </style>
+    <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> >
 <header class="shadow-1x pad-1 v-pad-0 white-bg">
