@@ -26,7 +26,9 @@
         }
         $company->merge_attributes();
         $company->save();
-
+        $redirect = "/wp-admin/admin.php?page=companies";
+        echo "<script type='text/javascript'>location.replace(\"$redirect\")</script>";
+        exit;
     }
 
     ?>
