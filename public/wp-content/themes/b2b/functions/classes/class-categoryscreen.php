@@ -69,7 +69,7 @@ class b2b_CategoryScreen extends ScreenObject {
 
         // Submenu for "Add Company"
         add_submenu_page(
-            'categories',
+            'b2b_categories',
             "Add New Category", // page title
             "Add New Category", // menu title
             'manage_options', // capability
