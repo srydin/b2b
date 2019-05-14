@@ -28,11 +28,16 @@ class ScreenListObject extends WP_List_Table {
      *
      * @return mixed
      */
-    public static function get_database_objs( $per_page = 5, $page_number = 1, $columns=[] ) {
+    public static function get_database_objs($args=[]) {
 
         global $wpdb;
+        $per_page = $args['per_page'];
+        $page_number = $args['page_number'];
+        $columns = static::get_columns();
+        if(empty($columns)){$columns = "*";}else{$columns = implode(", ", $columns);}
 
-        $sql = "SELECT {$columns} FROM " . static::$class_reference::$table_name;
+        //$sql = "SELECT {$columns} FROM " . static::$class_reference::$table_name;
+        $sql = "SELECT * FROM " . static::$class_reference::$table_name;
 
         if ( ! empty( $_REQUEST['orderby'] ) ) {
             $sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
@@ -45,16 +50,9 @@ class ScreenListObject extends WP_List_Table {
 
         $result = $wpdb->get_results( $sql, 'ARRAY_A' );
 
-        return $result;
-    }
+        $array = [];
 
-    public static function get_pretty_objs(){
-
-        if(empty($columns)){$columns = "*";}else{$columns = implode(", ", $columns);}
-
-        $array = static::get_database_objs( $per_page = 5, $page_number = 1, $columns);
-
-        foreach ($array as $item => $value){
+        foreach ($result as $item => $value){
 
             $array[$item] = wp_unslash($value);
 
@@ -201,12 +199,17 @@ class ScreenListObject extends WP_List_Table {
         $current_page = $this->get_pagenum();
         $total_items  = static::record_count();
 
+        $args = [
+            'per_page' => $per_page,
+            'page_number' => $current_page
+        ];
+
         $this->set_pagination_args( [
-            'total_items' => $total_items, //WE have to calculate the total number of items
-            'per_page'    => $per_page //WE have to determine how many items to show on a page
+            'total_items' => $total_items,
+            'per_page'    => $per_page,
         ] );
 
-        $this->items = self::get_pretty_objs();
+        $this->items = self::get_database_objs($args);
     }
 
     public function process_bulk_action() {

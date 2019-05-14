@@ -20,7 +20,6 @@ class Category extends DatabaseObject {
 
     public function categories_array(){
         global $wpdb;
-        $category_array = [];
         $categories = $wpdb->get_results( "SELECT * FROM b2b_category", ARRAY_A );
         return $categories;
     }

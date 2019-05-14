@@ -30,6 +30,31 @@ class DatabaseObject {
         return $object_array;
     }
 
+    static public function select_list($args=[]){
+
+        $class = $args['class'] ?? '';
+        $id = $args['id'] ?? '';
+        $selected = $args['selected'] ?? false;
+        $name = $args['name'] ?? '';
+
+        global $wpdb;
+        $sql = "SELECT * FROM " . static::$table_name;
+        $results = $wpdb->get_results($sql, ARRAY_A );
+        if(!$results) {
+            exit("Database query failed.");
+        }
+
+        $output = "";
+        $output .= "<select id=\"$id\" class=\"$class\" name='$name'>";
+        $output .= "<option value=''>Select one (optional)</option>";
+        foreach ($results as $result){
+            $output .= "<option value='" . $result['id'] . "'" . ($selected ? ' selected' : '') .  ">" . $result['name'] . "</option>";
+        }
+        $output .= "</select>";
+
+        return $output;
+    }
+
     static public function find_all() {
         $sql = "SELECT * FROM " . static::$table_name;
         return static::find_by_sql(esc_sql($sql));

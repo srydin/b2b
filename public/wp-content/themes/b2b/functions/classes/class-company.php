@@ -4,7 +4,7 @@ class Company extends DatabaseObject {
 
     // Properties
     public static $table_name = "b2b_company";
-    public static $db_columns = ['id','name','category','rank','logoURL','award','rating','address1','state','city','zip','description','slug','email','phone','is_accredited','pod_1','pod_2','pod_3','pod_4','CTA','primary_color','secondary_color'];
+    public static $db_columns = ['id','name','category','rank','logoURL','award','rating','address1','state','city','zip','description','slug','email','phone','is_accredited','deal_type','pod_1','pod_2','pod_3','pod_4','CTA','primary_color','secondary_color'];
     public $id;
     public $name;
     public $category;
@@ -21,6 +21,7 @@ class Company extends DatabaseObject {
     public $email;
     public $phone;
     public $is_accredited;
+    public $deal_type;
     public $pod_1;
     public $pod_2;
     public $pod_3;
@@ -62,6 +63,21 @@ class Company extends DatabaseObject {
             foreach ($categories as $category){
                 $is_selected = ($this->category == $category['id'] ? true : false);
                 $input .= "<option " . ($is_selected ? ' selected' : '') . " value=\"" . $category['id'] . "\">" . $category['name'] . "</option>";
+            }
+            $input .= "</select>";
+        }
+
+        elseif ($item === 'deal_type'){
+            $deal = new Deal();
+            $deal_types = $deal::DEAL_TYPES;
+            $input .= "<select name=\"$item\" id=\"company_data_$item\" required>";
+            $input .= "<option value=\"\">Select a deal type</option>";
+
+            $i = 0;
+            foreach ($deal_types as $deal_type){
+                $is_selected = ($this->deal_type === (string) $i ? true : false);
+                $input .= "<option " . ($is_selected ? ' selected' : '') . " value=\"" . $i . "\">" . $deal_types[$i] . "</option>";
+                ++$i;
             }
             $input .= "</select>";
         }

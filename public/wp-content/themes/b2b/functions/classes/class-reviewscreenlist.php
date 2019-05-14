@@ -2,11 +2,11 @@
 // create an abstract class for wp admin lists
 // adapted from https://github.com/Collizo4sky/
 
-class b2b_CategoryScreenList extends ScreenListObject {
+class ReviewScreenList extends ScreenListObject {
 
-    public static $singular_name = "Category";
-    public static $plural_name = "Categories";
-    public static $class_reference = "Category";
+    public static $singular_name = "Review";
+    public static $plural_name = "Reviews";
+    public static $class_reference = "Review";
 
     /** Class constructor */
     public function __construct() {
@@ -27,7 +27,9 @@ class b2b_CategoryScreenList extends ScreenListObject {
     public function get_sortable_columns() {
         $sortable_columns = array(
             'name' => array( 'name', true ),
-            'id' => array( 'id', true )
+            'first_name' => array( 'first_name', true ),
+            'last_name' => array( 'last_name', true ),
+            'date_submitted' => array( 'date_submitted', true ),
         );
 
         return $sortable_columns;
@@ -45,7 +47,7 @@ class b2b_CategoryScreenList extends ScreenListObject {
         ];
 
         //$arr = static::$class_reference::$db_columns;
-        $arr = ['name','id'];
+        $arr = ['name','id','status','date_submitted'];
 
         //array_shift($arr);
         foreach ($arr as $item){

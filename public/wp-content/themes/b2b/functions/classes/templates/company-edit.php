@@ -1,4 +1,4 @@
-    <?php
+<?php
     $obj = $_GET['obj'] ?? '';
     $is_edit = ($obj ? true : false);
     // check for nonce & verify
