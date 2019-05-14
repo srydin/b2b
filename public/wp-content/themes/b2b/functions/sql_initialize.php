@@ -77,6 +77,7 @@ $create_ddl = "CREATE TABLE `b2b_deal` (
 
 b2b_create_table($table_name,$create_ddl);
 
+$table_name = "b2b_review";
 $create_ddl = "CREATE TABLE `b2b_review` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(20) DEFAULT NULL,
