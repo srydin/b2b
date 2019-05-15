@@ -54,10 +54,14 @@ class Company extends DatabaseObject {
             $input .="<input type=\"radio\" name=\"$item\" value=\"0\"" . ($is_checked ? '' : ' checked') . "> Not Accredited<br>";
         }
 
+        elseif ($item === 'description'){
+            $input .= "<textarea class='form-control' rows='4' name=\"$item\" value=\"1\">" . $this->description . "</textarea>";
+        }
+
         elseif ($item === 'category'){
             $categories = new Category();
             $categories = $categories->categories_array();
-            $input .= "<select name=\"$item\" id=\"company_data_$item\" required>";
+            $input .= "<select class='form-control' name=\"$item\" id=\"company_data_$item\" required>";
             $input .= "<option value=\"\">Select a category</option>";
 
             foreach ($categories as $category){
@@ -70,7 +74,7 @@ class Company extends DatabaseObject {
         elseif ($item === 'deal_type'){
             $deal = new Deal();
             $deal_types = $deal::DEAL_TYPES;
-            $input .= "<select name=\"$item\" id=\"company_data_$item\" required>";
+            $input .= "<select class='form-control' name=\"$item\" id=\"company_data_$item\" required>";
             $input .= "<option value=\"\">Select a deal type</option>";
 
             $i = 0;
@@ -83,12 +87,12 @@ class Company extends DatabaseObject {
         }
 
         elseif (in_array($item,$num_inputs)){
-            $input .= "<input id=\"company_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"number\" value=\"" . wp_unslash(esc_html($this->$item)) . "\">";
+            $input .= "<input class='form-control' id=\"company_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"number\" value=\"" . wp_unslash(esc_html($this->$item)) . "\">";
 
         }
 
         else{
-            $input .= "<input id=\"company_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"text\" value=\"" . wp_unslash(esc_html($this->$item)) . "\">";
+            $input .= "<input class='form-control' id=\"company_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"text\" value=\"" . wp_unslash(esc_html($this->$item)) . "\">";
 
         }
         return $input;

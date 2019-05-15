@@ -46,14 +46,18 @@
         <?php //var_dump($message); ?>
     <form method="post">
         <table class="form-table">
+            <style>
+                .form-control {min-width: 400px;}
+            </style>
             <tbody>
                 <?php
                 foreach ($company_items as $item){
+                    $item_pretty = str_replace('_', ' ', $item);
                     if ($item === 'id'){
                         continue;
                     } // skip ID - not editable directly
                     echo "<tr>";
-                        echo "<th>" . ucwords($item) . "</th>";
+                        echo "<th>" . ucwords($item_pretty) . "</th>";
                         echo "<td>" . $company->get_company_input_callback($item) . "</td>";
                     echo "</tr>";
                 }
