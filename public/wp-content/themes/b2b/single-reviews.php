@@ -19,7 +19,10 @@ if ($_POST){
             'date_submitted' => $timestamp
     ];
     $submitted_review = new Review($args);
-    $submitted_review->save();
+    $submitted_review->save(); // these are escaped on the save
+
+    // todo send notification? move to separate page?
+    // todo is this secure enough? is there anything else we do .. eg. tokens?
 }
 
 get_header(); ?>

@@ -48,7 +48,7 @@ class DatabaseObject {
         $output .= "<select id=\"$id\" class=\"$class\" name='$name'>";
         $output .= "<option value=''>Select one (optional)</option>";
         foreach ($results as $result){
-            $output .= "<option value='" . $result['id'] . "'" . ($selected ? ' selected' : '') .  ">" . $result['name'] . "</option>";
+            $output .= "<option value='" . $result['id'] . "'" . ($selected == $result['id'] ? ' selected' : '') .  ">" . $result['name'] . "</option>";
         }
         $output .= "</select>";
 

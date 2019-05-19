@@ -1,27 +1,39 @@
 <?php
 
-add_action('add_meta_boxes', 'add_b2b_metabox');
+add_action('add_meta_boxes', 'add_b2b_company_metabox');
+add_action('add_meta_boxes', 'add_b2b_category_metabox');
 add_action('save_post', 'save_b2b_metabox');
 
 
-function add_b2b_metabox() {
+function add_b2b_company_metabox() {
     add_meta_box(
         'b2b_company_metabox',
         'Company',
-        'b2b_metabox_render',
+        'b2b_company_metabox_render',
         ['reviews', 'post','page'],
         'side',
         'default'
     );
 }
 
-function b2b_metabox_render( $post ) {
+function add_b2b_category_metabox() {
+    add_meta_box(
+        'b2b_company_metabox',
+        'Category',
+        'b2b_category_metabox_render',
+        ['post','page'],
+        'side',
+        'default'
+    );
+}
+
+function b2b_company_metabox_render( $post ) {
     // Add nonce for security and authentication.
     wp_nonce_field( 'custom_nonce_action', 'custom_nonce' );
 
     $company_id = get_post_meta($post->ID, 'company_id', true);
 
-    $list = new Company();
+    $companies = new Company();
 
     $args = [
         'class' => 'postbox',
@@ -30,9 +42,29 @@ function b2b_metabox_render( $post ) {
         'selected' => $company_id
     ];
 
-    $list = $list->select_list($args);
+    $company_list = $companies->select_list($args);
 
-    echo $list;
+    echo $company_list;
+}
+
+function b2b_category_metabox_render( $post ) {
+    // Add nonce for security and authentication.
+    wp_nonce_field( 'custom_nonce_action', 'custom_nonce' );
+
+    $category_id = get_post_meta($post->ID, 'category_id', true);
+
+    $categories = new Category();
+
+    $args = [
+        'class' => 'postbox',
+        'name' => 'b2b_category',
+        'id' => 'company_metabox',
+        'selected' => $category_id
+    ];
+
+    $category_list = $categories->select_list($args);
+
+    echo $category_list;
 }
 
 /**
@@ -68,6 +100,11 @@ function save_b2b_metabox( $post_id ) {
         return;
     }
 
-    update_post_meta($post_id, 'company_id', $_POST['b2b_company']);
+    if ($_POST['b2b_company']){
+        update_post_meta($post_id, 'company_id', $_POST['b2b_company']);
+    }
+    if ($_POST['b2b_category']){
+        update_post_meta($post_id, 'category_id', $_POST['b2b_category']);
+    }
 
 }

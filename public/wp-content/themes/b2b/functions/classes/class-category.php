@@ -32,5 +32,32 @@ class Category extends DatabaseObject {
 
         return $category['name'];
     }
+
+    public function companies_by_category(){
+        global $wpdb;
+
+        $sql = "SELECT id FROM " . Company::$table_name . " WHERE category=" . $this->id . " ORDER BY rank";
+
+        $results = $wpdb->get_results( $sql, ARRAY_A );
+
+        return $results;
+    }
+
+    public function the_table(){
+        $companies = $this->companies_by_category();
+
+        $output = "<h3 class='h2'>Best " . $this->name . " Companies</h3>";
+        $output .= "<table class='table-condensed'><tbody>";
+        echo $output;
+
+        foreach ($companies as $company){
+            $company_obj = new Company();
+            $company = $company_obj->find_by_id($company['id']);
+            include ('templates/category-table-row.php');
+        }
+
+        $output = "</tbody></table>";
+        echo $output;
+    }
 }
 ?>
