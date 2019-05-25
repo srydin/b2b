@@ -10,12 +10,12 @@
     $company = new Company();
     $company_items = Company::$db_columns;
 
-
-
     if (!empty($obj)){
         $company = $company->find_by_id((int) $obj);
     }
-    $message = [];
+
+
+
     if ($_POST){
         // MERGE attributes
         $post_names = array_keys($_POST);
@@ -24,26 +24,39 @@
                 $company->$name = $value;
             }
         }
+
         $company->merge_attributes();
-        $company->save();
-        $redirect = "/wp-admin/admin.php?page=companies";
-        echo "<script type='text/javascript'>location.replace(\"$redirect\")</script>";
-        exit;
+        $result = $company->save();
+        if ($result > 0){
+            create_b2b_notice('Company info saved successfully.', 'notice');
+        }
+        elseif($result === 0){
+            create_b2b_notice('Nothing saved.', 'notice');
+        }
+        else{
+            create_b2b_notice('Something went wrong.', 'warning');
+        }
+
     }
 
-    ?>
-    <div class="wrap">
+?>
 
-    <h1><?php
+    <div class="wrap">
+        <?php
+        display_theme_notices();
+        ?>
+
+    <h1 id="wphead"><?php
         if(!empty($obj)){
             echo "Edit Company (ID: $obj)";
         }
         else{
             echo esc_html( get_admin_page_title() );
             }
-            ?></h1>
-        <a href="/wp-admin/admin.php?page=companies">Back to all companies</a>
-        <?php //var_dump($message); ?>
+            ?>
+    </h1>
+        <a class="clear" href="/wp-admin/admin.php?page=companies">Back to all companies</a>
+
     <form method="post">
         <table class="form-table">
             <style>

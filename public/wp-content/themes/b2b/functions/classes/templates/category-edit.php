@@ -25,15 +25,23 @@ s<?php
             }
         }
         $category->merge_attributes();
-        $category->save();
-        $redirect = "/wp-admin/admin.php?page=b2b_categories";
-        echo "<script type='text/javascript'>location.replace(\"$redirect\")</script>";
-        exit;
+        $result = $category->save();
+        if ($result > 0){
+            create_b2b_notice('Category info saved successfully.', 'notice');
+        }
+        elseif($result === 0){
+            create_b2b_notice('Nothing saved.', 'notice');
+        }
+        else{
+            create_b2b_notice('Something went wrong.', 'warning');
+        }
     }
 
     ?>
     <div class="wrap">
-
+        <?php
+        display_theme_notices();
+        ?>
     <h1><?php
         if(!empty($obj)){
             echo "Edit Category (ID: $obj)";

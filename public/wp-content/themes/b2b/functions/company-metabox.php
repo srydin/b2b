@@ -29,7 +29,7 @@ function add_b2b_category_metabox() {
 
 function b2b_company_metabox_render( $post ) {
     // Add nonce for security and authentication.
-    wp_nonce_field( 'custom_nonce_action', 'custom_nonce' );
+    wp_nonce_field( 'save_b2b_metabox', 'company_metabox' );
 
     $company_id = get_post_meta($post->ID, 'company_id', true);
 
@@ -49,7 +49,7 @@ function b2b_company_metabox_render( $post ) {
 
 function b2b_category_metabox_render( $post ) {
     // Add nonce for security and authentication.
-    wp_nonce_field( 'custom_nonce_action', 'custom_nonce' );
+    wp_nonce_field( 'save_b2b_metabox', 'company_metabox' );
 
     $category_id = get_post_meta($post->ID, 'category_id', true);
 
@@ -77,8 +77,13 @@ function b2b_category_metabox_render( $post ) {
 
 function save_b2b_metabox( $post_id ) {
     // Add nonce for security and authentication.
-    $nonce_name   = isset( $_POST['custom_nonce'] ) ? $_POST['custom_nonce'] : '';
-    $nonce_action = 'custom_nonce_action';
+    $nonce_name   = isset( $_POST['company_metabox'] ) ? $_POST['company_metabox'] : '';
+    $nonce_action = 'save_b2b_metabox';
+
+    // no need to save if we're not posting
+    if (!$_POST){
+        return;
+    }
 
     // Check if nonce is valid.
     if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
