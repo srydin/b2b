@@ -35,8 +35,8 @@ class Review extends DatabaseObject {
     public function leave_rating(){
         $output = "<select class=\"form-control\" name='review_rating' required>";
         $output .= "<option value=''>Leave a rating</option>";
-        $max = 5;
-        for ($i = 1; $i <= $max; $i++){
+        $min = 1;
+        for ($i = 5; $i >= $min; --$i){
             $output .= "<option value='$i'>$i</option>";
         }
         $output .= "</select>";

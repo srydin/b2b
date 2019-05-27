@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-md-12">
     <?php
-
+    $company_name = get_query_var('company_name');
+    echo "<h2 class='h2'>$company_name Reviews</h2>";
     $company_id = get_query_var('company_id','0');
     $reviews = new Review(['company_id' => $company_id]);
     $reviews_arr = $reviews->published_reviews_by_company_id();
@@ -28,7 +29,7 @@
 
     // todo add company name?
     $company = new Company();
-    echo "<h2>Leave a review</h2>";
+    echo "<h2 class='h2'>Leave a review</h2>";
 
     // todo create modal?
     $reviews = new Review(['company_id' => $company_id]);
