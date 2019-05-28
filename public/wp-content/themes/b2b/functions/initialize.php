@@ -8,7 +8,10 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
+// start sessions
+session_start();
 
+// theme files
 require_once($base_path . 'classes/class-databaseobject.php');
 require_once($base_path . 'classes/class-screenlistobject.php');
 require_once($base_path . 'classes/class-screenobject.php');

@@ -30,10 +30,7 @@
     // todo add company name?
     $company = new Company();
     echo "<h2 class='h2'>Leave a review</h2>";
-
-    // todo create modal?
-    $reviews = new Review(['company_id' => $company_id]);
-    echo $reviews->review_form();
+    review_form($company_id);
     ?>
     </div>
 </div>
