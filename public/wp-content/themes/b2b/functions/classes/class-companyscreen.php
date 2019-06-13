@@ -24,7 +24,60 @@ class CompanyScreen extends ScreenObject {
         include ( __DIR__ . '/templates/company-listing.php');
     }
 
+
+
     public function company_edit_page() {
+
+        $obj = $_GET['obj'] ?? '';
+        $is_edit = ($obj ? true : false);
+        // check for nonce & verify
+        if ($is_edit && !wp_verify_nonce($_GET['_wpnonce'], 'sp_obj')){
+            wp_die('Action failed.');
+        }
+
+        // setup the company
+        $company = new Company();
+        if (!empty($obj)){
+            $company = $company->find_by_id((int) $obj);
+        }
+
+        if ($_POST) {
+            // MERGE attributes
+            $post_data = $_POST;
+
+            $has_logo = !empty($_FILES);
+
+            if ($has_logo){
+                // works to here
+                $image_id = media_handle_upload( 'company_logo', 0 );
+                $image_url = wp_get_attachment_url( $image_id );
+                $post_data['logoURL'] = $image_url;
+            }
+
+
+            foreach ($post_data as $name => $value){
+                if (property_exists($company, $name)){
+                    $company->$name = $value;
+                }
+            }
+
+            $company->merge_attributes();
+            $result = $company->save();
+
+            if ($result > 0){
+                create_b2b_notice('Company info saved successfully.', 'notice');
+            }
+
+            elseif($result === 0){
+                create_b2b_notice('Nothing saved.', 'notice');
+            }
+
+            else{
+                create_b2b_notice('Something went wrong.', 'warning');
+            }
+
+        }
+
         include ( __DIR__ . '/templates/company-edit.php');
     }
 

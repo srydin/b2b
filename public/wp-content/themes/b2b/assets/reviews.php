@@ -29,8 +29,10 @@
 
     // todo add company name?
     $company = new Company();
-    echo "<h2 class='h2'>Leave a review</h2>";
+    echo "<h2 class='h2'>Leave a review here</h2>";
     review_form($company_id);
+    echo "<h2 class='h2'>External page</h2>";
+    echo "<a class='btn btn-primary' href=\"/?page_id=34&company_id=$company_id\">Leave a review</a>";
     ?>
     </div>
 </div>

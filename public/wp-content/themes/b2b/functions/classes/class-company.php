@@ -86,6 +86,17 @@ class Company extends DatabaseObject {
             $input .= "</select>";
         }
 
+        elseif ($item === 'logoURL'){
+            if (!empty($this->logoURL)){
+                $input .=  "<img src=\"$this->logoURL\" style=\"width:300px;\"><br>";
+                $input .=  "<input type=\"hidden\" value='$this->logoURL' name=\"logoURL\" id=\"logoURL\" />";
+                $input .=  "<a id=\"clear_logo\">Remove/replace</a>";
+            }
+            else{
+                $input .=  "<input type=\"file\" name=\"company_logo\" id=\"company_logo\"  multiple=\"false\" />";
+            }
+        }
+
         elseif (in_array($item,$num_inputs)){
             $input .= "<input class='form-control' id=\"company_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"number\" value=\"" . wp_unslash(esc_html($this->$item)) . "\">";
 

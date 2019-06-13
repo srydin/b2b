@@ -17,7 +17,7 @@ if ($_POST){
 }
 
 get_header();
-var_dump($_SESSION);
+
 ?>
     <div class="container-fluid">
         <div class="row">
