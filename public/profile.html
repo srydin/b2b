@@ -388,7 +388,7 @@
             justify-content: space-between;
         }
 
-        header nav #header-join span svg {padding: 0 0 0 1em;}
+        /*header nav #header-join span svg {padding: 0 0 0 1em;}*/
 
         #mobile-menu {
             display: none;
@@ -747,9 +747,13 @@
             margin-right: 0.5em;
         }
         @media (max-width: 560px) {
+            #profile-title {font-size:1.999em; margin:0}
             .btn {margin-bottom:0.5em;}
             #best-links {margin-top:-2.323em}
             #best-links #best-1, #best-links #best-2, #best-links #best-3 {flex-basis:100%}
+            #b2b-rating {font-size:1.414em}
+            .sub-score {font-size:1em}
+            #sidebar .affix {top:0!important}
         }
     </style>
 </head>
@@ -794,7 +798,7 @@
         <div class="row">
             <div id="breadcrumb" class="col-sm-12"><span class="block"><a class="sm-text-1 dark-blue" href="/">Home</a> / <a class="sm-text-1 dark-blue" href="/">CRM Software</a> / <a class="sm-text-1 w-500 blue" href="">Salesforce Review</a></span></div>
             <div class="col-sm-7">
-                <h1 id="profile-title" class="black text-5 w-600 benton">Salesforce Review</h1> <span id="b2b-rating" class="green-bg white text-3 w-600 sm-pad-2">4.2</span>
+                <h1 id="profile-title" class="black text-5 w-600 benton">Salesforce Review</h1>
                 <span id="updated-date" class="w-500 sm-text-1">Updated July 14, 2019</span>
                 <p id="excerpt" class="text-1">Nullam pellentesque felis id ante accumsan, ut sollicitudin nibh mattis. Suspendisse eget nisl iaculis, egestas leo sed, ullamcorper lectus.</p>
             </div>
@@ -976,12 +980,9 @@
             <p>Mauris vel leo ex. Ut eget laoreet mi. Integer porta aliquam pretium. Aenean elementum at justo laoreet ullamcorper. Suspendisse vestibulum lorem libero, a congue nibh faucibus ut. Nulla dignissim metus in gravida rutrum. Quisque interdum et mi sit amet porta. Aliquam pharetra faucibus rutrum.</p>
             <div id="top-company" class="pad-2 shadow-1x col-sm-12">
                 <div class="row">
-                    <div class="col-xs-3">
-                        <img class="img-responsive" src="https://via.placeholder.com/300x300">
-                    </div>
-                    <div class="col-xs-9">
+                    <div class="col-xs-12 col-sm-9 col-sm-push-3">
                         <div class="row">
-                            <div class="col-xs-7">
+                            <div class="col-xs-12">
                                 <a id="company-title" class="block dark-blue text-2 w-500" href="">Salesforce</a>
                                 <div class="rating-box">
                                     <div class="stars-overlay" style="width:90%;">
@@ -991,7 +992,7 @@
                                 <span class="text-1 blue w-500 sm-pad-3 v-pad-0">4.2</span>
                                 </span>
                             </div>
-                            <div class="col-xs-5 text-right sm-text-1 md-blue w-500">Best Customer Support</div>
+                            <div class="col-xs-12 text-right sm-text-1 md-blue w-500">Best Customer Support</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -1020,14 +1021,11 @@
                         </div>
                         <div class="row">
                             <div class="sm-pad-2 h-pad-0"></div>
-                            <div class="col-sm-4">
-                                <a href="" class="btn md-blue text-1 w-500">(987)654-3210</a>
+                            <div class="col-sm-6">
+                                <a href="" class="btn btn-block lt-blue-bg blue sm-pad-2 text-1 w-500">Read Reviews</a>
                             </div>
-                            <div class="col-sm-4">
-                                <a href="" class="btn btn-block lt-blue-bg blue text-1 sm-pad-2 w-500">Read Reviews</a>
-                            </div>
-                            <div class="col-sm-4">
-                                <a href="" class="btn btn-block green-bg white text-1 sm-pad-2 w-500">Visit Site
+                            <div class="col-sm-6">
+                                <a href="" class="btn btn-block green-bg white sm-pad-2 text-1 w-500">Visit Site
                                     <svg class="sm-pad-2 v-pad-0" width="7px" height="12px">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <g id="Path-2" fill="#FFFFFF" fill-rule="nonzero">
@@ -1039,6 +1037,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-3 col-sm-pull-9">
+                        <img class="img-responsive" src="https://via.placeholder.com/300x160">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1048,6 +1049,7 @@
                 <div class="row">
                     <div class="col-sm-3 col-xs-4 text-center">
                         <div class="col">
+                            <span id="b2b-rating" class="green-bg white text-3 w-600 sm-pad-2">4.2</span>
                             <span class="block text-1 w-500 dark-blue">Best Customer Support</span>
                         </div>
                     </div>
