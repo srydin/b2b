@@ -4,10 +4,30 @@ class Category extends DatabaseObject {
 
     // Properties
     public static $table_name = "b2b_category";
-    public static $db_columns = ['id','name'];
+    public static $db_columns = [
+        'id',
+        'name',
+        'description',
+        'descriptor_1',
+        'descriptor_2',
+        'descriptor_3',
+        'descriptor_4',
+        'metric_1',
+        'metric_2',
+        'metric_3',
+        'metric_4'
+    ];
     public $id;
     public $name;
-
+    public $description;
+    public $descriptor_1;
+    public $descriptor_2;
+    public $descriptor_3;
+    public $descriptor_4;
+    public $metric_1;
+    public $metric_2;
+    public $metric_3;
+    public $metric_4;
 
     // Methods
     public function __construct($args=[]){
@@ -46,8 +66,7 @@ class Category extends DatabaseObject {
     public function the_table(){
         $companies = $this->companies_by_category();
 
-        $output = "<h3 class='h2'>Best " . $this->name . " Companies</h3>";
-        $output .= "<table class='table-condensed'><tbody>";
+        $output = "<table class='table-condensed'><tbody>";
         echo $output;
 
         foreach ($companies as $company){
@@ -58,6 +77,22 @@ class Category extends DatabaseObject {
 
         $output = "</tbody></table>";
         echo $output;
+    }
+
+    public function feature_row(){
+        include ('templates/category-feature.php');
+    }
+
+    public function get_stats(){
+        $output = "";
+        for ($x = 1; $x <= 4; $x++) {
+            $metric = 'metric_' . $x;
+            $descriptor = 'descriptor_' . $x;
+            if ( !empty( $this->$metric ) ){ // if if metric has info
+                $output .= "<li><span class=\"md-blue-bg inline sm-text-1\">" . $this->$metric . "</span>" . $this->$descriptor . "</li>";
+            } // if metric has info
+        }
+        return $output;
     }
 }
 ?>
