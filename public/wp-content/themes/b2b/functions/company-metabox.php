@@ -18,7 +18,7 @@ function add_b2b_company_metabox() {
 
 function add_b2b_category_metabox() {
     add_meta_box(
-        'b2b_company_metabox',
+        'b2b_category_metabox',
         'Category',
         'b2b_category_metabox_render',
         ['post','page'],

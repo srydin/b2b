@@ -4,10 +4,16 @@
 		<main id="main" class="site-main">
 
 		<?php
-                the_title();
-                the_post();
-                the_content();
-		?>
+
+            if ( have_posts() ){
+                while (have_posts()){
+                    the_title();
+                    the_post();
+                    the_content();
+                }
+            }
+
+        ?>
 
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->

@@ -17,6 +17,15 @@ add_action( 'init', function () {
 add_filter('use_block_editor_for_post', '__return_false');
 
 
+// post support
+function b2b_add_excerpt_support_for_pages() {
+    add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'b2b_add_excerpt_support_for_pages' );
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
+
+
 // error notices
 
 function create_b2b_notice($message = "", $type = ""){
