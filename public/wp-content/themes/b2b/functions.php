@@ -22,6 +22,14 @@ function b2b_add_excerpt_support_for_pages() {
     add_post_type_support( 'page', 'excerpt' );
 }
 add_action( 'init', 'b2b_add_excerpt_support_for_pages' );
+
+function b2b_add_image_support_for_posts() {
+    add_theme_support( 'post-thumbnails', array( 'post' ) );
+    add_image_size( 'hero-thumb', 400, 335 );
+}
+add_action( 'init', 'b2b_add_image_support_for_posts' );
+
+// remove pesky paragraph auto tagging
 remove_filter( 'the_content', 'wpautop' );
 remove_filter( 'the_excerpt', 'wpautop' );
 

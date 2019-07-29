@@ -7,9 +7,9 @@
 
             if ( have_posts() ){
                 while (have_posts()){
-                    the_title();
                     the_post();
-                    the_content();
+                    get_template_part('includes/article-header');
+                    get_template_part('includes/article-main');
                 }
             }
 
@@ -17,5 +17,6 @@
 
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->
+
 
 <?php get_footer();

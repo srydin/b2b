@@ -6,17 +6,25 @@ $company_id = get_query_var('company_id');
 ?>
 <div id="sidebar" class="col-sm-4 col-sm-pull-8">
     <div class="pad-2 affix-top" data-spy="affix" data-offset-top="1090" style="top:4.656em;">
-        <span class="sm-text-1 w-500">In this guide</span>
-        <ul id="table-of-contents">
-            <li><a class="text-1 dark-blue" href="">Best <?php echo $category_name; ?> List</a></li>
-            <li><a class="text-1 dark-blue" href="">Top Rated Solutions</a></li>
-            <li><a class="text-1 dark-blue" href="">How We Select</a></li>
-            <li><a class="text-1 dark-blue" href="">Solution Overview</a></li>
-            <li><a class="text-1 dark-blue" href="">Reviews</a></li>
-            <li><a class="text-1 dark-blue" href="">FAQ</a></li>
-            <li><a class="text-1 dark-blue" href="">Resources</a></li>
-        </ul>
-        <?php if ( !empty( $company_id ) ) {
+        <?php if ( is_page_template('template-buyers-guides.php') ){
+
+            // is guide ?>
+
+            <span class="sm-text-1 w-500">In this guide</span>
+            <ul id="table-of-contents">
+                <li><a class="text-1 dark-blue" href="">Best <?php echo $category_name; ?> List</a></li>
+                <li><a class="text-1 dark-blue" href="">Top Rated Solutions</a></li>
+                <li><a class="text-1 dark-blue" href="">How We Select</a></li>
+                <li><a class="text-1 dark-blue" href="">Solution Overview</a></li>
+                <li><a class="text-1 dark-blue" href="">Reviews</a></li>
+                <li><a class="text-1 dark-blue" href="">FAQ</a></li>
+                <li><a class="text-1 dark-blue" href="">Resources</a></li>
+            </ul>
+
+        <?php
+        } // is guide
+
+            if ( !empty( $company_id ) ) {
 
             $company = new Company();
             $company = $company->find_by_id($company_id);
