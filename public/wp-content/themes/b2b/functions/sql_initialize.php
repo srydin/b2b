@@ -23,6 +23,15 @@ $table_name = "b2b_category";
 $create_ddl = "CREATE TABLE `b2b_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
+  `description` text,
+  `descriptor_1` varchar(40) DEFAULT NULL,
+  `descriptor_2` varchar(40) DEFAULT NULL,
+  `descriptor_3` varchar(40) DEFAULT NULL,
+  `descriptor_4` varchar(40) DEFAULT NULL,
+  `metric_1` int(3) DEFAULT NULL,
+  `metric_2` int(3) DEFAULT NULL,
+  `metric_3` int(3) DEFAULT NULL,
+  `metric_4` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 b2b_create_table($table_name,$create_ddl);
@@ -54,8 +63,9 @@ $create_ddl = "CREATE TABLE `b2b_company` (
   `CTA` varchar(40) DEFAULT '',
   `primary_color` varchar(10) DEFAULT '',
   `secondary_color` varchar(10) DEFAULT '',
+  `profile_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;";
 
 b2b_create_table($table_name,$create_ddl);
 
