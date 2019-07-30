@@ -104,3 +104,46 @@ function collect_review($company_id){
 // disable html editor
 add_filter( 'user_can_richedit' , '__return_false', 50 );
 
+function get_review_parent_page_url($value){
+    global $wpdb;
+
+    $query_args = array(
+        'relation' => 'AND',
+        array(
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'template-buyers-guides.php',
+            'compare' => '='
+        ),
+        array(
+            'meta_key' => 'category_id',
+            'meta_value' => '1',
+            'compare' => '='
+        )
+    );
+
+    $args = array(
+        'post_type'              => array( 'page' ),
+        'order'                  => 'ASC',
+        'orderby'                => 'title',
+        'meta_query'             => $query_args
+    );
+
+    // The Query
+    $alt_query = new WP_Query( $args );
+
+    if ( $alt_query->have_posts() ) {
+
+        while ( $alt_query->have_posts() ) {
+
+            $alt_query->the_post();
+
+            $this_post_url = get_the_permalink() ;
+        }
+    }
+
+    wp_reset_query(); // in case this function is used in the loop
+
+    $result = !empty($this_post_url) ? $this_post_url : false;
+
+    return $result;
+}

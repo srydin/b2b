@@ -26,7 +26,12 @@ if ( have_posts() ) {
     <section id="profile-banner" class="lt-blue-bg pad-4 h-pad-0">
         <div class="container">
             <div class="row">
-                <div id="breadcrumb" class="col-sm-12"><span class="block"><a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Home</a> / <a class="sm-text-1 dark-blue" href="/"><?php echo $category_name; ?></a> / <a class="sm-text-1 w-500 blue" href=""><?php echo get_the_title(); ?></a></span></div>
+                <div id="breadcrumb" class="col-sm-12"><span class="block"><a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Home</a> / <?php
+                        $middlecrumb = get_review_parent_page_url($category_id); // TODO buggy when the company's category doesn't have a guide
+                        if ($middlecrumb){
+                            echo "<a class=\"sm-text-1 dark-blue\" href=\"{$middlecrumb}\">{$category_name}</a>";
+                        } // middlecrumb exists
+                        ?> / <a class="sm-text-1 w-500 blue" href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></span></div>
                 <div class="col-sm-7">
                     <h1 id="profile-title" class="black text-5 w-600 benton"><?php echo get_the_title(); ?></h1>
                     <span id="updated-date" class="w-500 sm-text-1">Updated <?php the_modified_date(); ?></span>
