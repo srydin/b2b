@@ -81,13 +81,20 @@ function save_b2b_metabox( $post_id ) {
     $nonce_action = 'save_b2b_metabox';
 
     // no need to save if we're not posting
+
+    $post_type_whitelist = ['acf-field', 'acf-field-group'];
+
+    $active_post_type = get_post_type($post_id);
+
     if (!$_POST){
         return;
     }
 
+    if ( in_array($active_post_type,$post_type_whitelist) ) return;
+
     // Check if nonce is valid.
     if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
-        wp_die('Not validated');
+            wp_die('Not validated');
     }
 
     // Check if user has permissions to save data.

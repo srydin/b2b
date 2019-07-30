@@ -44,6 +44,15 @@ class Company extends DatabaseObject {
         return number_format( ( (int) $this->rating / 20 ) , 2);
     }
 
+    public function get_category_id(){
+        return $this->category;
+    }
+
+    public function get_category_name(){
+        $category = new Category();
+        return $category->category_name_by_id( $this::get_category_id() );
+    }
+
     public function go_link(){
         return 'https://go.b2breviews.com/' . $this->slug;
     }
@@ -74,6 +83,21 @@ class Company extends DatabaseObject {
         else {
             return $_SERVER['REQUEST_URI'] . "#" . $this->name_to_link();
         }
+    }
+
+    public function get_stats(){
+        $output = "<div id=\"b2b-score\" class=\"col-sm-9 col-xs-8\">";
+        for ($x = 1; $x <= 4; $x++) {
+            $rating = 'rating_' . $x;
+            $descriptor = 'descriptor_' . $x;
+
+            if (get_field($rating)){
+                $output .= "<div class=\"sub-line\"><span class=\"sub-label\">" . get_field($descriptor) . "</span><div class=\"sub-score\">" . get_field($rating) . "</div></div>";
+            }
+
+        }
+        $output .= "</div>";
+        return $output;
     }
 
     public function get_company_input_callback($item){

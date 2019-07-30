@@ -3,10 +3,40 @@
 $category_id = get_query_var('category_id');
 $category_name = get_query_var('category_name');
 $company_id = get_query_var('company_id');
+$is_singular_review = is_singular('reviews');
+
+$class_list = $is_singular_review ? 'col-sm-5' : 'col-sm-4 col-sm-pull-8';
+
+if ( !empty( $company_id ) ) {
+
+    $company = new Company();
+    $company = $company->find_by_id($company_id);
+
+}
+
 ?>
-<div id="sidebar" class="col-sm-4 col-sm-pull-8">
+<div id="sidebar" class="<?php echo $class_list; ?>">
+
+    <?php
+    if ($is_singular_review){ ?>
+
+        <div id="company-scoring-breakdown" class="lt-blue-bg pad-3">
+            <div class="row">
+                <div class="col-sm-3 col-xs-4 text-center">
+                    <div class="col">
+                        <span id="b2b-rating" class="green-bg white text-3 w-600 sm-pad-2"><?php echo $company->star_count(); ?></span>
+                        <span class="block text-1 w-500 dark-blue"><?php echo $company->award; ?></span>
+                    </div>
+                </div>
+                <?php echo $company->get_stats(); ?>
+            </div>
+        </div>
+
+    <?php } // singular review
+    ?>
+
     <div class="pad-2 affix-top" data-spy="affix" data-offset-top="1090" style="top:4.656em;">
-        <?php if ( is_page_template('template-buyers-guides.php') ){
+        <?php if ( is_page_template('template-buyers-guides.php') || $is_singular_review ){
 
             // is guide ?>
 
@@ -26,11 +56,8 @@ $company_id = get_query_var('company_id');
 
             if ( !empty( $company_id ) ) {
 
-            $company = new Company();
-            $company = $company->find_by_id($company_id);
-
             ?>
-        <div id="cta-fixed" class="lt-blue-bg pad-3 text-center hidden-xs">
+        <div id="cta-fixed" class="lt-blue-bg pad-3 text-center hidden-xs" style="display:none;">
             <span class="block text-2 w-500 dark-blue"><?php echo $company->name; ?></span>
             <span class="sm-text-1 w-500 md-blue"><?php echo $company->award; ?></span>
             <img class="img-responsive pad-1" style="max-width: 210px" src="<?php echo $company->get_logo(); ?>">

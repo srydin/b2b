@@ -33,6 +33,11 @@ add_action( 'init', 'b2b_add_image_support_for_posts' );
 remove_filter( 'the_content', 'wpautop' );
 remove_filter( 'the_excerpt', 'wpautop' );
 
+function b2b_add_excerpt_support_for_reviews() {
+    add_post_type_support( 'reviews', 'excerpt' );
+}
+add_action( 'init', 'b2b_add_excerpt_support_for_reviews' );
+
 
 // error notices
 
@@ -95,3 +100,7 @@ function collect_review($company_id){
     // todo send notification? move to separate page?
     // todo is this secure enough? is there anything else we do .. eg. tokens?
 }
+
+// disable html editor
+add_filter( 'user_can_richedit' , '__return_false', 50 );
+
