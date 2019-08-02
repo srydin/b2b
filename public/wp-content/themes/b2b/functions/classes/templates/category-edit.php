@@ -1,4 +1,4 @@
-s<?php
+<?php
     $obj = $_GET['obj'] ?? '';
     $is_edit = ($obj ? true : false);
     // check for nonce & verify
@@ -40,7 +40,7 @@ s<?php
     ?>
     <div class="wrap">
         <?php
-        display_theme_notices();
+        echo display_theme_notices();
         ?>
     <h1><?php
         if(!empty($obj)){

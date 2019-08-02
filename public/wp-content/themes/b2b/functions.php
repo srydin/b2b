@@ -48,14 +48,16 @@ function create_b2b_notice($message = "", $type = ""){
 
 function display_theme_notices(){
     if (isset($_SESSION['b2b_notice']) && $_SESSION['b2b_notice_type'] === 'notice'){
-        b2b_update_notice($_SESSION['b2b_notice']);
+        $message = $_SESSION['b2b_notice'];
         unset($_SESSION['b2b_notice_type']);
         unset($_SESSION['b2b_notice']);
+        return b2b_update_notice($message);
     }
     if (isset($_SESSION['b2b_notice']) && $_SESSION['b2b_notice_type'] === 'warning'){
-        b2b_error_notice($_SESSION['b2b_notice']);
+        $message = $_SESSION['b2b_notice'];
         unset($_SESSION['b2b_notice_type']);
         unset($_SESSION['b2b_notice']);
+        return b2b_error_notice($_SESSION['b2b_notice']);
     }
 }
 add_action( 'admin_menu', 'display_theme_notices' );
@@ -64,43 +66,110 @@ function b2b_error_notice($message) {
     $notice = "<div class=\"error notice\">";
     $notice .= "<p>$message</p>";
     $notice .= "</div>";
-    echo $notice;
+    return $notice;
 }
 function b2b_update_notice($message) {
     $notice = "<div class=\"updated notice\">";
     $notice .= "<p>$message</p>";
     $notice .= "</div>";
-    echo $notice;
+    return $notice;
 }
 
-function review_form($company_id){
-    // todo create modal?
-    $reviews = new Review(['company_id' => $company_id]);
+
+
+function get_http_headers(){
+
+        $headers = [];
+
+        foreach ($_SERVER as $k => $v) {
+            if (substr($k,0,5) == 'HTTP_') {
+                $hkey = str_replace(' ', '-',
+                    ucwords(strtolower(str_replace('_', ' ', substr($k, 5)))));
+                $headers[$hkey] = $v;
+            }
+        }
+
+        return $headers;
+
+}
+
+function review_form($company=false){
+    $reviews = new Review(['company_id' => $company->id]);
     echo $reviews->review_form();
 }
 
 function collect_review($company_id){
+
     $fname = $_POST['first_name'];
     $lname = $_POST['last_name'];
+    $email = $_POST['email'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $title = $_POST['title'];
     $rating = $_POST['review_rating'];
+    $name = $_POST['company_name'] ?? false;
+    $reviewer_company = $_POST['reviewer_company'];
     $timestamp = date('Y-m-d G:i:s');
 
     $args = [
         'first_name' => $fname,
         'last_name' => $lname,
         'status' => 'submitted',
-        'company_id' => $company_id,
+        'email' => $email,
+        'city' => $city,
+        'state' => $state,
+        'title' => $title,
+        'reviewer_company' => $reviewer_company,
         'rating' => (int) $rating,
         'review_text_unmoderated' => $_POST['review_text_unmoderated'],
         'date_submitted' => $timestamp
     ];
-    $submitted_review = new Review($args);
-    $submitted_review->save(); // these are escaped on the save
 
-    // todo send notification? move to separate page?
+    $is_validated = validate_review_data($args);
+
+    if ($is_validated){
+
+        // create a new company for validated reviews
+        if(!$company_id){
+            $company = new Company();
+            $company->name = $name;
+            $company_id = $company->save();
+        };
+
+        // only add company id after we're sure it exists
+        $args['company_id'] = $company_id;
+
+        // create the review obj and save
+        $submitted_review = new Review($args);
+        $submitted_review->headers = json_encode( get_http_headers() );
+        $submitted_review->token = uniqid();
+
+        $submitted_review->save(); // these are escaped on the save
+
+        // todo configure notification
+        wp_mail($submitted_review->email,'Important notice','check this out!');
+
+        // remove company id from the session
+        unset($_SESSION['company_id']);
+        $url = site_url() . '/thanks';
+        wp_redirect($url);
+    }
+    else{
+        return false;
+    }
+
+
     // todo is this secure enough? is there anything else we do .. eg. tokens?
 }
 
+function display_b2b_errors(){
+    if ($_SESSION['errors']){
+        echo "<div class=\"alert alert-warning\">";
+        echo "<strong>Warning!</strong> " .$_SESSION['errors'];
+        echo "</div>";
+        unset($_SESSION['errors']);
+    }
+}
 // disable html editor
 add_filter( 'user_can_richedit' , '__return_false', 50 );
 

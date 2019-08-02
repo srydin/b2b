@@ -8,7 +8,7 @@
 </script>
 <div class="wrap">
         <?php
-        display_theme_notices();
+        echo display_theme_notices();
         ?>
 
     <h1 id="wphead"><?php

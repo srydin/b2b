@@ -1,4 +1,7 @@
 <div class="wrap">
+    <?php
+    echo display_theme_notices();
+    ?>
     <h2>Companies</h2>
     <a href="<?php echo home_url(); ?>/wp-admin/admin.php?page=companies_edit">Add New</a>
     <div id="poststuff">

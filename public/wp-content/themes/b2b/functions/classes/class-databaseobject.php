@@ -17,7 +17,7 @@ class DatabaseObject {
         global $wpdb;
         $results = $wpdb->get_results($sql, OBJECT ); // don't forget to escape as needed
         if(!$results) {
-            exit("Database query failed.");
+            return false;
         }
 
         // results into objects
@@ -110,7 +110,7 @@ class DatabaseObject {
         $sql .= "')";
         $result = $wpdb->query($sql);
         if($result) {
-            $this->id = $wpdb->insert_id;
+            $result = $wpdb->insert_id;
         }
         return $result;
     }
