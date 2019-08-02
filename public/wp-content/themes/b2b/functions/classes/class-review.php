@@ -128,7 +128,10 @@ class Review extends DatabaseObject {
         $review_per_page = 10;
         $offset = ( $page - 1 ) * $review_per_page;
         global $wpdb;
-        $where = "SELECT * FROM " . $this::$table_name . " WHERE company_id=" . $this->company_id . " AND status='published' OFFSET gi{$offset}";
+        $where = "SELECT * FROM " . $this::$table_name . " WHERE company_id=" . $this->company_id . " AND status='published'";
+        if ($page > 1){
+            $where .= " OFFSET {$offset}";
+        }
         $reviews = $wpdb->get_results( $where, ARRAY_A );
         return $reviews;
     }
