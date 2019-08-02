@@ -30,6 +30,7 @@ class ReviewScreenList extends ScreenListObject {
             'first_name' => array( 'first_name', true ),
             'last_name' => array( 'last_name', true ),
             'date_submitted' => array( 'date_submitted', true ),
+            'id' => array( 'id', true ),
         );
 
         return $sortable_columns;

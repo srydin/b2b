@@ -231,8 +231,11 @@ class ScreenListObject extends WP_List_Table {
                 $redirect_location = esc_url_raw(add_query_arg());
                 $redirect_location = remove_query_arg(array('action','obj','_wpnonce'),$redirect_location);
 
-               echo "<script type='text/javascript'>location.replace(\"$redirect_location\")</script>";
-               exit;
+                echo "<script type='text/javascript'>location.replace(\"$redirect_location\")</script>";
+
+                create_b2b_notice(ucfirst(static::$class_reference) . ' deleted successfully.', 'notice');
+
+                exit;
             }
 
         }
@@ -256,7 +259,11 @@ class ScreenListObject extends WP_List_Table {
             $redirect_location = esc_url_raw(add_query_arg());
             $redirect_location = remove_query_arg(array('action','obj','_wpnonce'),$redirect_location);
 
+
             echo "<script type='text/javascript'>location.replace(\"$redirect_location\")</script>";
+
+            create_b2b_notice(ucfirst(static::$class_reference) . ' deleted successfully.', 'notice');
+
             exit;
         }
     }

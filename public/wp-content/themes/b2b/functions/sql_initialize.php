@@ -82,16 +82,22 @@ $create_ddl = "CREATE TABLE `b2b_review` (
   `id` int(3) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(20) DEFAULT NULL,
   `last_name` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `reviewer_company` varchar(20) DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL,
   `rating` int(1) DEFAULT NULL,
   `review_text_unmoderated` text,
   `review_text_moderated` text,
-  `headers` varchar(400) DEFAULT NULL,
+  `headers` text,
   `date_submitted` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `token` varchar(100) DEFAULT NULL,
   `name` varchar(30) DEFAULT NULL,
-  `status` enum('submitted','published','no_publish') NOT NULL DEFAULT 'submitted',
+  `status` enum('submitted','published','remoderate','no_publish') DEFAULT 'submitted',
+  `no_publish_reason` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;";
 
 b2b_create_table($table_name,$create_ddl);
