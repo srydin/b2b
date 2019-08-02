@@ -62,6 +62,18 @@
                     if ($item === 'id'){
                         continue;
                     } // skip ID - not editable directly
+
+                    elseif ($item === 'description'){
+
+                        echo "<tr>";
+                        echo "<th>" . ucwords($item) . "</th>";
+                        $input = "";
+
+                        echo "<td><textarea rows='5' id=\"category_data_" . wp_unslash(esc_html($item)) ."\" name=\"$item\" type=\"text\">" . esc_html($category->$item) . "</textarea></td>";
+                        echo "</tr>";
+                        continue;
+                    } // handle category description
+
                     echo "<tr>";
                         echo "<th>" . ucwords($item) . "</th>";
                         $input = "";

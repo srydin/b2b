@@ -4,12 +4,19 @@
 		<main id="main" class="site-main">
 
 		<?php
-                the_title();
-                the_post();
-                the_content();
-		?>
+
+            if ( have_posts() ){
+                while (have_posts()){
+                    the_post();
+                    get_template_part('includes/article-header');
+                    get_template_part('includes/article-main');
+                }
+            }
+
+        ?>
 
 		</main><!-- .site-main -->
 	</section><!-- .content-area -->
+
 
 <?php get_footer();

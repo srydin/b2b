@@ -17,6 +17,28 @@ add_action( 'init', function () {
 add_filter('use_block_editor_for_post', '__return_false');
 
 
+// post support
+function b2b_add_excerpt_support_for_pages() {
+    add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'b2b_add_excerpt_support_for_pages' );
+
+function b2b_add_image_support_for_posts() {
+    add_theme_support( 'post-thumbnails', array( 'post' ) );
+    add_image_size( 'hero-thumb', 400, 335 );
+}
+add_action( 'init', 'b2b_add_image_support_for_posts' );
+
+// remove pesky paragraph auto tagging
+remove_filter( 'the_content', 'wpautop' );
+remove_filter( 'the_excerpt', 'wpautop' );
+
+function b2b_add_excerpt_support_for_reviews() {
+    add_post_type_support( 'reviews', 'excerpt' );
+}
+add_action( 'init', 'b2b_add_excerpt_support_for_reviews' );
+
+
 // error notices
 
 function create_b2b_notice($message = "", $type = ""){
@@ -147,4 +169,50 @@ function display_b2b_errors(){
         echo "</div>";
         unset($_SESSION['errors']);
     }
+}
+// disable html editor
+add_filter( 'user_can_richedit' , '__return_false', 50 );
+
+function get_review_parent_page_url($value){
+    global $wpdb;
+
+    $query_args = array(
+        'relation' => 'AND',
+        array(
+            'meta_key' => '_wp_page_template',
+            'meta_value' => 'template-buyers-guides.php',
+            'compare' => '='
+        ),
+        array(
+            'meta_key' => 'category_id',
+            'meta_value' => '1',
+            'compare' => '='
+        )
+    );
+
+    $args = array(
+        'post_type'              => array( 'page' ),
+        'order'                  => 'ASC',
+        'orderby'                => 'title',
+        'meta_query'             => $query_args
+    );
+
+    // The Query
+    $alt_query = new WP_Query( $args );
+
+    if ( $alt_query->have_posts() ) {
+
+        while ( $alt_query->have_posts() ) {
+
+            $alt_query->the_post();
+
+            $this_post_url = get_the_permalink() ;
+        }
+    }
+
+    wp_reset_query(); // in case this function is used in the loop
+
+    $result = !empty($this_post_url) ? $this_post_url : false;
+
+    return $result;
 }

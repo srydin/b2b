@@ -4,7 +4,7 @@ class Company extends DatabaseObject {
 
     // Properties
     public static $table_name = "b2b_company";
-    public static $db_columns = ['id','name','category','rank','logoURL','award','rating','address1','state','city','zip','description','slug','email','phone','is_accredited','deal_type','pod_1','pod_2','pod_3','pod_4','CTA','primary_color','secondary_color'];
+    public static $db_columns = ['id','name','category','rank','logoURL','award','rating','address1','state','city','zip','description','slug','email','phone','is_accredited','deal_type','pod_1','pod_2','pod_3','pod_4','CTA','primary_color','secondary_color','profile_id'];
     public $id;
     public $name;
     public $category;
@@ -29,7 +29,7 @@ class Company extends DatabaseObject {
     public $CTA;
     public $primary_color;
     public $secondary_color;
-
+    public $profile_id;
 
     // Methods
     public function __construct($args=[]){
@@ -38,6 +38,66 @@ class Company extends DatabaseObject {
              $this->$k = $v;
            }
          }
+    }
+
+    public function star_count(){
+        return number_format( ( (int) $this->rating / 20 ) , 2);
+    }
+
+    public function get_category_id(){
+        return $this->category;
+    }
+
+    public function get_category_name(){
+        $category = new Category();
+        return $category->category_name_by_id( $this::get_category_id() );
+    }
+
+    public function go_link(){
+        return 'https://go.b2breviews.com/' . $this->slug;
+    }
+
+    public function get_logo(){
+        $logoURL = !empty($this->logoURL) ? $this->logoURL : 'https://via.placeholder.com/300x160';
+        return $logoURL;
+    }
+
+    public function get_CTA(){
+        $cta = !empty($this->CTA) ? $this->CTA : 'Visit Site';
+        return $cta;
+    }
+
+    public function name_to_link()
+    {
+        $name = $this->name;
+        return strtolower(preg_replace(array('/[^a-zA-Z0-9 -]/', '/[ -]+/', '/^-|-$/'),
+            array('', '-', ''), $name));
+    }
+
+    public function get_review_link(){
+        $has_link = !empty($this->profile_id) ? true : false;
+
+        if ($has_link){
+            return get_permalink($this->profile_id);
+        }
+        else {
+            return $_SERVER['REQUEST_URI'] . "#" . $this->name_to_link();
+        }
+    }
+
+    public function get_stats(){
+        $output = "<div id=\"b2b-score\" class=\"col-sm-9 col-xs-8\">";
+        for ($x = 1; $x <= 4; $x++) {
+            $rating = 'rating_' . $x;
+            $descriptor = 'descriptor_' . $x;
+
+            if (get_field($rating)){
+                $output .= "<div class=\"sub-line\"><span class=\"sub-label\">" . get_field($descriptor) . "</span><div class=\"sub-score\">" . get_field($rating) . "</div></div>";
+            }
+
+        }
+        $output .= "</div>";
+        return $output;
     }
 
     public function get_company_input_callback($item){
@@ -68,6 +128,26 @@ class Company extends DatabaseObject {
                 $is_selected = ($this->category == $category['id'] ? true : false);
                 $input .= "<option " . ($is_selected ? ' selected' : '') . " value=\"" . $category['id'] . "\">" . $category['name'] . "</option>";
             }
+            $input .= "</select>";
+        }
+
+        elseif ($item === 'profile_id'){
+
+            $input = "<select name=\"profile_id\" id=\"profile_id\">";
+            $input .= "<option value=\"\">Please choose a <review></review></option>";
+            global $post;
+            $args = array(
+                'post_type' => 'reviews',
+                'numberposts' => -1,
+                'orderby' => 'title',
+                'order'   => 'ASC'
+            );
+            $posts = get_posts($args);
+            foreach( $posts as $post ) {
+                setup_postdata($post);
+                $selected = ($this->profile_id == $post->ID) ? ' selected ' : '';
+                $input .= "<option value=" . $post->ID . "\"" . $selected . ">" . $post->post_title . "</option>";
+            } // foreach post
             $input .= "</select>";
         }
 
