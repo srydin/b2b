@@ -43,7 +43,9 @@ if ( have_posts() ) {
 
         <section id="content" class="container">
             <div class="row">
-                <?php the_content(); ?>
+                <div class="col-sm-7">
+                    <?php the_content(); ?>
+                </div>
                 <!-- Table of Contents -->
                 <?php get_template_part('includes/sidebar'); ?>
             </div>
