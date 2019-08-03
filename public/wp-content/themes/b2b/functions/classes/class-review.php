@@ -27,6 +27,8 @@ class Review extends DatabaseObject {
     public const STATUS_TYPES = ['submitted','published','no_publish'];
     public const NO_PUBLISH_REASONS = ['spam','too short','offensive','violates terms','employee','other'];
     public const MIN_REVIEW_LENGTH_CHARS = 285;
+    public const REVIEWS_PER_PAGE = 10;
+
 
     // Methods
     public function __construct($args=[]){
@@ -125,15 +127,39 @@ class Review extends DatabaseObject {
     }
 
     public function published_reviews_by_company_id($page = 1){
-        $review_per_page = 10;
-        $offset = ( $page - 1 ) * $review_per_page;
+        $offset = ( (int) $page - 1 ) * self::REVIEWS_PER_PAGE;
         global $wpdb;
         $where = "SELECT * FROM " . $this::$table_name . " WHERE company_id=" . $this->company_id . " AND status='published'";
+        if ($page == 1){
+            $where .= " LIMIT ". self::REVIEWS_PER_PAGE;
+        }
         if ($page > 1){
-            $where .= " OFFSET {$offset}";
+            $where .= " LIMIT {$offset}," . self::REVIEWS_PER_PAGE;
         }
         $reviews = $wpdb->get_results( $where, ARRAY_A );
         return $reviews;
+    }
+
+    public function get_reviews_meta_data(){
+        // return an array
+        $arr = [];
+
+        global $wpdb;
+        $where = "SELECT COUNT(*) FROM " . $this::$table_name . " WHERE company_id=" . $this->company_id . " AND status='published'";
+        $reviews = (int) $wpdb->get_var( $where );
+
+        // get the values
+        $float = $reviews / self::REVIEWS_PER_PAGE;
+        $modulo = ( fmod(  $reviews, self::REVIEWS_PER_PAGE ) ) ? true : false;
+
+        $pages = ceil($float);
+
+        // set the values
+        $arr['pages'] = $pages;
+        $arr['modulo'] = $modulo;
+
+        // return the array
+        return $arr;
     }
 }
 ?>

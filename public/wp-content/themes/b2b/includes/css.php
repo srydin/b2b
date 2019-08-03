@@ -1,3 +1,11 @@
+<style>
+    .mb1{
+        margin-bottom: 10px;
+    }
+    .mb2{
+        margin-bottom: 20px;
+    }
+</style>
 <?php
 
 if ( is_front_page() || ( is_page() && !is_page_template('template-buyers-guides.php') ) ){ ?>
