@@ -1,10 +1,13 @@
 <?php $company_id = get_post_meta($post->ID,'company_id',true);
 set_query_var('company_id', $company_id);
+$is_page_template = get_query_var('page_template',false);
+$class_list = $is_page_template ? 'col-sm-12' : 'col-sm-8';
 ?>
 
 <section id="profile-banner" class="lt-blue-bg pad-4 h-pad-0">
     <div class="container">
         <div class="row">
+            <?php if ( !$is_page_template ): ?>
             <div class="col-sm-4">
                 <?php
                 if ( get_the_post_thumbnail( $post->ID, 'hero-thumb' ) ){
@@ -15,7 +18,8 @@ set_query_var('company_id', $company_id);
                 }
                 ?>
             </div>
-            <div class="col-sm-8">
+            <?php endif; // is page template ?>
+            <div class="<?php echo $class_list; ?>>">
                 <div id="breadcrumb"><span class="block"><a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Home</a> / <a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Knowledge Center</a> / <a class="sm-text-1 w-500 blue" href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></span></div>
                 <h1 id="page-title" class="black text-5 w-600 benton"><?php the_title(); ?></h1>
                 <span id="updated-date" class="w-500 sm-text-1">Updated <?php the_modified_date(); ?></span>
