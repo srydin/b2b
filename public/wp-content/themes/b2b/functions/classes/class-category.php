@@ -56,7 +56,7 @@ class Category extends DatabaseObject {
     public function companies_by_category(){
         global $wpdb;
 
-        $sql = "SELECT id FROM " . Company::$table_name . " WHERE category=" . $this->id . " ORDER BY rank";
+        $sql = "SELECT id FROM " . Company::$table_name . " WHERE category=" . $this->id . " ORDER BY is_accredited DESC, rank DESC";
 
         $results = $wpdb->get_results( $sql, ARRAY_A );
 
