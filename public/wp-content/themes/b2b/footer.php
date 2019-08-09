@@ -18,10 +18,6 @@
         </ul>
     </nav>
 </footer>
-
-<div id="join-modal" class="modal">
-    <p>This works</p>
-    <a href="#" rel="modal:close">Close</a>
-</div>
+<?php get_template_part('includes/mailchimp');?>
 </body>
 </html>
