@@ -177,24 +177,21 @@ function get_review_parent_page_url($value){
     global $wpdb;
 
     $query_args = array(
-        'relation' => 'AND',
         array(
-            'meta_key' => '_wp_page_template',
-            'meta_value' => 'template-buyers-guides.php',
+            'key' => '_wp_page_template',
+            'value' => 'template-buyers-guides.php',
             'compare' => '='
         ),
         array(
-            'meta_key' => 'category_id',
-            'meta_value' => '1',
+            'key' => 'category_id',
+            'value' => $value,
             'compare' => '='
         )
     );
 
     $args = array(
-        'post_type'              => array( 'page' ),
-        'order'                  => 'ASC',
-        'orderby'                => 'title',
-        'meta_query'             => $query_args
+        'post_type' => 'page',
+        'meta_query' => $query_args
     );
 
     // The Query
@@ -206,7 +203,7 @@ function get_review_parent_page_url($value){
 
             $alt_query->the_post();
 
-            $this_post_url = get_the_permalink() ;
+            $this_post_url = get_the_permalink();
         }
     }
 
