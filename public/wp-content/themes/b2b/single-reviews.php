@@ -16,6 +16,27 @@ if ($_POST){
     collect_review($company_id);
 }
 
+$review_json = json_encode(
+    array(
+        "@context" => "http://schema.org",
+        "@type" => "SoftwareApplication",
+        "applicationCategory" => "BusinessApplication",
+        "operatingSystem" => "Windows 7, OSX 10.6",
+        "name" => $company->name,
+        "review" => [
+                "@type" => "Review",
+                "reviewRating" => [
+                    "@type" => "Rating",
+                    "ratingValue" => $company->star_count(),
+                ],
+                "author" => [
+                    "@type" => "Organization",
+                    "name" => "B2Breviews.com",
+                ]
+        ]
+    )
+);
+
 get_header();
 
 if ( have_posts() ) {
@@ -96,6 +117,7 @@ if ( have_posts() ) {
 
 
         <script type="application/ld+json"><?php echo $breadcrumb_json; ?></script>
+        <script type="application/ld+json"><?php echo $review_json; ?></script>
 
         <?php
 
