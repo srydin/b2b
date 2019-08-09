@@ -17,7 +17,7 @@ if ( have_posts() ){
         set_query_var('company_id', $company_id);
         set_query_var('category_name', $category->name);
 
-?>
+        ?>
 
     <section id="category-banner" class="lt-blue-bg">
         <div class="container">
@@ -87,6 +87,30 @@ if ( have_posts() ){
         </div>
     </section>
 <?php
+
+        $breadcrumb_json = json_encode(
+
+            array(
+                "@context" => "http://schema.org",
+                "@type" => "BreadcrumbList",
+                "itemListElement" => array(
+                    array(
+                        "@type" => "ListItem",
+                        "position" => 1,
+                        "name" => "Home",
+                        "item" => $GLOBALS['site_url']
+                    ),
+                    array(
+                        "@type" => "ListItem",
+                        "position" => 2,
+                        "name" => get_the_title(),
+                        "item" => get_the_permalink()
+                    ),
+                )
+            )
+        );
+
+        echo "<script type=\"application/ld+json\">{$breadcrumb_json}</script>";
 
     } // while have posts
 } // if have posts

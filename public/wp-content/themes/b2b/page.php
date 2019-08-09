@@ -1,5 +1,6 @@
 <?php get_header();
 set_query_var('page_template', 'page');
+
 ?>
 
     <section id="primary" class="content-area">

@@ -173,7 +173,7 @@ function display_b2b_errors(){
 // disable html editor
 add_filter( 'user_can_richedit' , '__return_false', 50 );
 
-function get_review_parent_page_url($value){
+function get_parent_page_url($value){
     global $wpdb;
 
     $query_args = array(

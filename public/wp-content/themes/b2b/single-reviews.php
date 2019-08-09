@@ -26,12 +26,18 @@ if ( have_posts() ) {
     <section id="profile-banner" class="lt-blue-bg pad-4 h-pad-0">
         <div class="container">
             <div class="row">
-                <div id="breadcrumb" class="col-sm-12"><span class="block"><a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Home</a> / <?php
-                        $middlecrumb = get_review_parent_page_url($category_id); // TODO buggy when the company's category doesn't have a guide
+                <div id="breadcrumb" class="col-sm-12">
+                    <span class="block">
+                        <a class="sm-text-1 dark-blue" href="<?php echo $GLOBALS['site_url']; ?>">Home</a> /
+                        <?php
+                        $middlecrumb = get_parent_page_url($category_id); // TODO buggy when the company's category doesn't have a guide
                         if ($middlecrumb){
-                            echo "<a class=\"sm-text-1 dark-blue\" href=\"{$middlecrumb}\">{$category_name}</a>";
+                            echo "<a class=\"sm-text-1 dark-blue\" href=\"{$middlecrumb}\">{$category_name}</a> / ";
                         } // middlecrumb exists
-                        ?> / <a class="sm-text-1 w-500 blue" href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></span></div>
+                        ?>
+                        <a class="sm-text-1 w-500 blue" href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a>
+                    </span>
+                </div>
                 <div class="col-sm-7">
                     <h1 id="profile-title" class="black text-5 w-600 benton"><?php echo get_the_title(); ?></h1>
                     <span id="updated-date" class="w-500 sm-text-1">Updated <?php the_modified_date(); ?></span>
@@ -40,6 +46,36 @@ if ( have_posts() ) {
             </div>
         </div>
     </section>
+    <?php
+        $breadcrumb_json = json_encode(
+
+            array(
+                "@context" => "http://schema.org",
+                "@type" => "BreadcrumbList",
+                "itemListElement" => array(
+                        array(
+                            "@type" => "ListItem",
+                            "position" => 1,
+                            "name" => "Home",
+                            "item" => $GLOBALS['site_url']
+                        ),
+                        array(
+                            "@type" => "ListItem",
+                            "position" => 2,
+                            "name" => $category_name,
+                            "item" => $middlecrumb
+                        ),
+                        array(
+                            "@type" => "ListItem",
+                            "position" => 3,
+                            "name" => get_the_title(),
+                            "item" => get_the_permalink()
+                        ),
+                    )
+            )
+        );
+
+        ?>
 
         <section id="content" class="container">
             <div class="row">
@@ -58,7 +94,10 @@ if ( have_posts() ) {
             </div>
         </section>
 
-<?php
+
+        <script type="application/ld+json"><?php echo $breadcrumb_json; ?></script>
+
+        <?php
 
     } // while have posts
 } // have posts

@@ -1,5 +1,8 @@
-<?php $company_id = get_post_meta($post->ID,'company_id',true);
+<?php
+$company_id = get_post_meta($post->ID,'company_id',true);
+$category_id = get_post_meta($post->ID,'category_id',true);
 set_query_var('company_id', $company_id);
+set_query_var('category_id', $category_id);
 $is_page_template = get_query_var('page_template',false);
 $class_list = $is_page_template ? 'col-sm-12' : 'col-sm-8';
 ?>
@@ -20,7 +23,74 @@ $class_list = $is_page_template ? 'col-sm-12' : 'col-sm-8';
             </div>
             <?php endif; // is page template ?>
             <div class="<?php echo $class_list; ?>>">
-                <div id="breadcrumb"><span class="block"><a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Home</a> / <a class="sm-text-1 dark-blue" href="<?php echo site_url(); ?>">Knowledge Center</a> / <a class="sm-text-1 w-500 blue" href="<?php echo get_the_permalink(); ?>"><?php echo get_the_title(); ?></a></span></div>
+                <div id="breadcrumb">
+                    <?php $crumb_list = [
+                            [
+                                    'name' => 'Home',
+                                    'url' => $GLOBALS['site_url']
+                            ]
+                        ];
+                    ?>
+                    <span class="block">
+                        <?php
+                        if ($category_id){
+                            $category = new Category();
+                            $category_name = $category->category_name_by_id($category_id);
+                            $middlecrumb = get_parent_page_url($category_id); // TODO buggy when the company's category doesn't have a guide
+                            if ($middlecrumb){
+                            array_push($crumb_list,[
+                                    'name' => $category_name,
+                                    'url' => $middlecrumb
+                            ]);
+                            } // middlecrumb exists
+                        }
+                        else{
+                            array_push($crumb_list,[
+                                'name' => 'Knowledge Center',
+                                'url' => $GLOBALS['site_url'] // TODO get final url
+                            ]);
+
+                        }
+
+                        // add the last crumb - the current page
+                        array_push($crumb_list,[
+                            'name' => get_the_title(),
+                            'url' => get_the_permalink()
+                        ]);
+
+                        // echo out the breadcrumbs
+                        // did it this way to make it easy for the json breadcrumbs
+                        for ($i = 0; $i < (count($crumb_list) - 1);$i++){
+                         echo "<a class=\"sm-text-1 dark-blue\" href=\"" . $crumb_list[$i]['url'] . "\">" . $crumb_list[$i]['name'] . "</a> / ";
+                        }
+                        // get the last one
+                        echo "<a class=\"sm-text-1 w-500 blue\" href=\"" . $crumb_list[$i]['url'] . "\">" . $crumb_list[$i]['name'] . "</a>";
+
+                        // now create the json
+                        $list_items = [];
+                        $position = 1;
+                        foreach ($crumb_list as $crumb){
+                            $list_item = [
+                                "@type" => "ListItem",
+                                "position" => $position,
+                                "name" => $crumb['name'],
+                                "item" => $crumb['url']
+                            ];
+                            array_push($list_items,$list_item);
+                            $position++;
+                        }
+
+                        $breadcrumb_json = json_encode(
+                            array(
+                                "@context" => "http://schema.org",
+                                "@type" => "BreadcrumbList",
+                                "itemListElement" => array( $list_items )
+                            )
+                        );
+                        ?>
+                    </span>
+                </div>
+                <script type="application/ld+json"><?php echo $breadcrumb_json; ?></script>
                 <h1 id="page-title" class="black text-5 w-600 benton"><?php the_title(); ?></h1>
                 <span id="updated-date" class="w-500 sm-text-1">Updated <?php the_modified_date(); ?></span>
                 <?php if ( get_field('subtitle_1') || get_field('subtitle_2') ) { // summary points exist ?>
