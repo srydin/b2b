@@ -9,7 +9,7 @@
             </g>
         </g>
     </svg>
-    <p class="text-center">Copyright 2019 B2Breviews.com. All Rights Reserved.</p>
+    <p class="text-center">Copyright <?php echo date('Y'); ?> B2Breviews.com. All Rights Reserved.</p>
     <nav>
         <ul>
             <li><a href="">Privacy Policy</a></li>
@@ -18,5 +18,10 @@
         </ul>
     </nav>
 </footer>
+
+<div id="join-modal" class="modal">
+    <p>This works</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 // path definition
 $base_path = get_template_directory() . '/functions/';
-
+$GLOBALS['site_url'] = site_url();
 // make sure this wp class is loaded
 if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );

@@ -1,9 +1,12 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/bootstrap.min.js"></script>
+
+<script src="<?php echo $GLOBALS['site_url']; ?>/wp-content/themes/b2b/assets/js/jquery.modal.js"></script>
+
 <?php
 // buyers guide
 if ( is_page_template('template-buyers-guides.php') ){ ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/bootstrap.min.js"></script>
     <script>
         $("#cta-fixed").hide();
         $(document).scroll(function() {
@@ -20,9 +23,7 @@ if ( is_page_template('template-buyers-guides.php') ){ ?>
 
 
 if ( is_single() ){ ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/bootstrap.min.js"></script>
+
     <script>
         $("#cta-fixed").hide();
         $(document).scroll(function() {
