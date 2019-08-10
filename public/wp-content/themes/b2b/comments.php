@@ -16,13 +16,13 @@ if ( $comments ) {
         echo "<div class='col-12'>";
         echo "<div class=\"panel panel-default\">";
         echo "<div class=\"panel panel-heading\">";
-		echo '<strong>' . $comment->comment_author . '</strong>';
+        echo '<div class="text-right">' . get_comment_date('l, F j, Y') . '</div>';
         echo "</div>";
         echo "<div class=\"panel panel-body\">";
         echo '<p>' . $comment->comment_content . '</p>';
-        echo '<span>' . comment_date('l, F j, Y') . '</span>';
-        echo "</div>";
-        echo "</div>";
+        echo '<small class="block text-1 w-500\">' . $comment->comment_author . '</small>';
+        echo "</div>"; // panel-body
+        echo "</div>"; // col-12
     }
 } else {
 	// echo 'Login to leave a comment?';
