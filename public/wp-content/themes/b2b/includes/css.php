@@ -1390,20 +1390,21 @@ if ( is_single() ){ // is_single ?>
     }
 
     header nav #header-join {
-    border: 2px solid;
-    border-radius: 2px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+        border: 2px solid;
+        border-radius: 2px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
     }
 
     header nav #header-join span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     header nav #header-join span svg {padding: 0 0 0 1em;}
+
 
     #mobile-menu {
     display: none;
