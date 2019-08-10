@@ -26,9 +26,9 @@
     </a>
     <nav>
         <ul class="benton">
-            <li><a class="w-500 dark-blue" href="/">About Us</a></li>
-            <li><a class="w-500 dark-blue" href="/">Knowledge Center</a></li>
-            <li><a class="w-500 dark-blue" href="/">Contact</a></li>
+            <li><a class="w-500 dark-blue" href="<?php $GLOBALS['site_url']?>/about-us/">About Us</a></li>
+            <li><a class="w-500 dark-blue" href="<?php $GLOBALS['site_url']?>/knowledge-center">Knowledge Center</a></li>
+            <li><a class="w-500 dark-blue" href="<?php $GLOBALS['site_url']?>/contact-us">Contact</a></li>
         </ul>
         <a id="header-join" href="#join-modal" rel="modal:open" class="sm-pad-2 blue text-1 w-600 benton">
             <span>Join Us

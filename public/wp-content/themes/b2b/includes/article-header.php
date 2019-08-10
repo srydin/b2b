@@ -45,10 +45,10 @@ $class_list = $is_page_template ? 'col-sm-12' : 'col-sm-8';
                             } // middlecrumb exists
                         }
                         else{
-                            array_push($crumb_list,[
-                                'name' => 'Knowledge Center',
-                                'url' => $GLOBALS['site_url'] // TODO get final url
-                            ]);
+//                            array_push($crumb_list,[
+//                                'name' => 'Knowledge Center',
+//                                'url' => $GLOBALS['site_url'] // TODO get final url
+//                            ]);
 
                         }
 

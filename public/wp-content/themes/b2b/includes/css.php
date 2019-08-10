@@ -120,7 +120,7 @@ if ( is_front_page() || ( is_page() && !is_page_template('template-buyers-guides
             position: fixed;
             position: sticky;
             position: -webkit-sticky;
-            z-index: 9999999;
+            z-index: 2;
             top: 0;
             left: 0;
             width: 100%;
@@ -615,7 +615,7 @@ if (is_page_template('template-buyers-guides.php')){ ?>
         position: fixed;
         position: sticky;
         position: -webkit-sticky;
-        z-index: 9999999;
+        z-index: 2;
         top: 0;
         left: 0;
         width: 100%;
@@ -1355,7 +1355,7 @@ if ( is_single() ){ // is_single ?>
     position: fixed;
     position: sticky;
     position: -webkit-sticky;
-    z-index: 9999999;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;
@@ -2104,7 +2104,7 @@ if (is_singular( ['reviews'] )){ // reviews ?>
         position: fixed;
         position: sticky;
         position: -webkit-sticky;
-        z-index: 9999999;
+        z-index: 2;
         top: 0;
         left: 0;
         width: 100%;
