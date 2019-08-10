@@ -115,8 +115,18 @@ function save_b2b_metabox( $post_id ) {
     if ($_POST['b2b_company']){
         update_post_meta($post_id, 'company_id', $_POST['b2b_company']);
     }
+    else{
+        if (get_post_meta($post_id,'company_id') ){
+            delete_post_meta($post_id, 'company_id');
+        }
+    }
     if ($_POST['b2b_category']){
         update_post_meta($post_id, 'category_id', $_POST['b2b_category']);
+    }
+    else{
+        if (get_post_meta($post_id,'category_id') ){
+            delete_post_meta($post_id, 'category_id');
+        }
     }
 
 }
