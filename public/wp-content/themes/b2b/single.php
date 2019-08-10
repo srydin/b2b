@@ -10,11 +10,6 @@
                     the_post();
                     get_template_part('includes/article-header');
                     get_template_part('includes/article-main');
-
-                    // TODO add comments
-//                    if ( comments_open() || get_comments_number() ) {
-//                        comments_template();
-//                    }
                 }
             }
 
