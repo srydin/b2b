@@ -1,6 +1,6 @@
 <?php
 $args = array(
-   // args here
+    'post_id' => $post->ID,
 );
 
 // The Query
@@ -25,6 +25,6 @@ if ( $comments ) {
         echo "</div>";
     }
 } else {
-	echo 'No comments found.';
+	// echo 'Login to leave a comment?';
 }
 ?>
