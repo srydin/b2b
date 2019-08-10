@@ -1,3 +1,20 @@
+<style>
+    .review-card{
+        margin-bottom: 20px;
+        background-color: #F7F7FB;
+        border: 1px solid #F7F7FB;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    }
+    .review-header{
+        padding: 10px 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .review-body{
+        padding: 15px;
+    }
+</style>
 <div class="col-md-7">
         <?php
         // Start the reviews section with a headline
@@ -20,14 +37,31 @@
         // loop through each review and style them // TODO add other fields like city/state/title/etc
         if (!empty($reviews_arr)) {
             foreach ($reviews_arr as $review) {
-                $output = "<div class=\"panel-body lt-blue-bg\">";
-                $output .= "<div class=\"flex-rating\" style='align-items: center; justify-content: left'><div class=\"rating-box\"><div class=\"stars-overlay\" style=\"width:90%;\"><div class=\"stars-full\"></div></div></div><span class=\"num-score text-1 blue w-500 sm-pad-3 v-pad-0\">4.50</span></div>";
-                $output .= "<div class=''>";
-                $output .= 'Proof of concept - This is not a duplicate review - Review ID ' . $review['id'] . ': ' . ucfirst($review['review_text_moderated']);
-                $output .= "</div>";
-                $output .= "-" . $review['first_name'] . ' ' . $review['last_name'];
-                $output .= "</div>";
-                echo $output;
+
+                echo "<div class='col-12'>";
+                echo "<div class=\"review-card\">";
+                echo "<div class=\"review-header lt-blue-bg blue\">";
+                echo '<div class="text-right">' . $review->get_review_date() . '</div>';
+                echo "</div>";
+                echo "<div class=\"review-body\">";
+                echo "<div class='row'>";
+                echo "
+        <div class=\"col-sm-3 col-xs-4 text-center\">
+            <div class=\"col\">
+                <span id=\"b2b-rating\" class=\"green-bg white text-3 w-600 sm-pad-2\">" . $review->star_count() . "</span>
+            </div>
+        </div>";
+                echo "
+        <div class='col-sm-9 col-xs-8'>
+        ";
+                echo '<p>' . ucfirst($review->review_text_moderated) . '</p>';
+                echo '<hr>';
+                echo '<small><span class="block text-1 w-500 benton">' . $review->first_name . ' ' . substr($review->last_name,0,1) . '.</span>' . $review->title . '</small>';
+                echo "</div>"; //col-sm-9
+                echo "</div>"; // row
+
+                echo "</div>"; // panel-body
+                echo "</div>"; // col-12
             } // foreach review, echo content
 
             // is pagination required?

@@ -136,8 +136,16 @@ class Review extends DatabaseObject {
         if ($page > 1){
             $where .= " LIMIT {$offset}," . self::REVIEWS_PER_PAGE;
         }
-        $reviews = $wpdb->get_results( $where, ARRAY_A );
-        return $reviews;
+        $reviews = $wpdb->get_results( $where, OBJECT );
+
+        // results into objects
+        $object_array = [];
+
+        foreach ($reviews as $result){
+            $object_array[] = $this::instantiate($result);
+        }
+
+        return $object_array;
     }
 
     public function get_reviews_meta_data(){
@@ -160,6 +168,14 @@ class Review extends DatabaseObject {
 
         // return the array
         return $arr;
+    }
+
+    public function get_review_date($date_format="l, F j, Y"){
+        $date = mysql2date( $date_format, $this->date_submitted );
+        return $date;
+    }
+    public function star_count(){
+        return number_format($this->rating,'1');
     }
 }
 ?>
