@@ -1,17 +1,12 @@
 <?php get_header(); ?>
-    <section id="top-banner" class="pad-3 dark-blue-bg">
-        <h1 class="white flex-text-5 w-600 benton">Make Your Business Better</h1>
-        <h2 class="white flex-text-3 w-500 benton">B2B Reviews helps you find business solutions.</h2>
-        <div id="form-wrapper" class="pad-1 h-pad-0 sm-text-wrapper text-center">
-            <input class="sm-text-1 pad-2" placeholder="Select a category" type="text">
-            <button class="text-1 w-700 white benton">Find Solutions</button>
+    <section id="profile-banner" class="lt-blue-bg pad-4 h-pad-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <h1 id="page-title" class="black text-5 w-600 benton">Knowledge Center</h1>
+                </div>
+            </div>
         </div>
-        <picture>
-            <source type="image/webp" srcset="wp-content/themes/b2b/assets/images/top-banner.webp">
-            <source type="image/jpeg" srcset="wp-content/themes/b2b/assets/images/top-banner.jpg">
-            <img src="wp-content/themes/b2b/assets/images/top-banner.jpg">
-        </picture>
-    </section>
     <section id="business-categories" class="pad-4 divided">
         <h2 class="xs-text-wrapper text-3 sm-pad-2 w-400 text-center benton">Helping businesses make better decisions</h2>
         <a class="text-1 w-500 text-center sm-pad-3 h-pad-0 blue underline block benton" href="">View All Categories</a>
