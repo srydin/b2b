@@ -19,21 +19,22 @@ if ($_POST){
 $review_json = json_encode(
     array(
         "@context" => "http://schema.org",
-        "@type" => "SoftwareApplication",
-        "applicationCategory" => "BusinessApplication",
-        "operatingSystem" => "Windows 7, OSX 10.6",
-        "name" => $company->name,
-        "review" => [
-                "@type" => "Review",
-                "reviewRating" => [
+        "@type" => "Review",
+        "reviewBody" => get_the_excerpt(),
+        "itemReviewed" => [
+                '@type' => 'Product',
+                'name' => get_the_title()
+        ],
+        "author" => [
+            "@type" => "Organization",
+            "name" => "B2Breviews.com",
+        ],
+        "reviewRating" => [
                     "@type" => "Rating",
                     "ratingValue" => $company->star_count(),
-                ],
-                "author" => [
-                    "@type" => "Organization",
-                    "name" => "B2Breviews.com",
+                    "bestRating" => 5,
+                    "worstRating" => 1
                 ]
-        ]
     )
 );
 
